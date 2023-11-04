@@ -1,0 +1,13 @@
+package com.digitalholics.healthrecordandexpertise;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class HealthrecordandexpertiseApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
