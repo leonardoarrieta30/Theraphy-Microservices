@@ -60,18 +60,6 @@ public class PatientsController {
         return mapper.toResource(patientService.update(patientId, mapper.toModel(resource)));
     }
 
-    @RequestMapping(value = "getTheraphyById/{theraphyId}", method = RequestMethod.GET)
-    public Theraphy getTheraphyById(@PathVariable Integer theraphyId){
-        Theraphy theraphy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + theraphyId, Theraphy.class);
-        return theraphy;
-    }
-
-    @RequestMapping(value = "getAppointmentById/{appointmentId}", method = RequestMethod.GET)
-    public Appointment getAppointmentById(@PathVariable Integer appointmentId){
-        Appointment appointment = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/" + appointmentId, Appointment.class);
-        return appointment;
-    }
-
     @GetMapping("patient/therapy/{therapyId}")
     public ResponseDTO getTherapyByAppointmentPatientById(@PathVariable Integer therapyId){
         ResponseDTO responseDTO = new ResponseDTO();

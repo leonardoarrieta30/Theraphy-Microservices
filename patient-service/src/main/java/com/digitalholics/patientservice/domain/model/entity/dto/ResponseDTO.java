@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDTO {
-    //private Appointment appointment;
+    private Appointment appointment;
     private Theraphy theraphy;
     private Patient patient;
 }
