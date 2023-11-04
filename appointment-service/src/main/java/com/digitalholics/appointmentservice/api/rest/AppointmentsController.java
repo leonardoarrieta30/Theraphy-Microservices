@@ -34,115 +34,35 @@ public class AppointmentsController {
         this.appointmentService = appointmentService;
         this.mapper = mapper;
     }
+    @GetMapping("{appointmentId}")
+    public AppointmentResource getAppointmentById(@PathVariable Integer appointmentId) {
+        return mapper.toResource(appointmentService.getById(appointmentId));
+    }
 
     @GetMapping("allAppointments")
     public Page<AppointmentResource> getAllAppointments(Pageable pageable) {
         return mapper.modelListPage(appointmentService.getAll(), pageable);
     }
 
-    @GetMapping("{appointmentId}")
-    public AppointmentResource getAppointmentById(@PathVariable Integer appointmentId) {
-        return mapper.toResource(appointmentService.getById(appointmentId));
-    }
-
     @GetMapping("appointment/{theraphyId}")
     public AppointmentResource getAppointmentByTheraphyId(@PathVariable Integer theraphyId) {
         return mapper.toResource(appointmentService.getAppointmentByTheraphyId(theraphyId));
     }
-
-    @PostMapping("create_appointment")
-    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource) {
-        return new ResponseEntity<>(mapper.toResource(appointmentService.create((resource))), HttpStatus.CREATED);
-    }
-
     @PutMapping("{appointmentId}")
     public AppointmentResource updateAppointment(@PathVariable Integer appointmentId,
                                                  @RequestBody UpdateAppointmentResource resource) {
         return mapper.toResource(appointmentService.update(appointmentId, mapper.toModel(resource)));
     }
-
+    @PostMapping("create_appointment")
+    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource) {
+        return new ResponseEntity<>(mapper.toResource(appointmentService.create((resource))), HttpStatus.CREATED);
+    }
     @DeleteMapping("{appointmentId}")
     public ResponseEntity<?> deleteAppointment(@PathVariable Integer appointmentId) {
         return appointmentService.delete(appointmentId);
     }
 
 
-//
-//    @GetMapping("appointment/theraphy-patient/{patientId}")
-//    public Page<AppointmentResource> getAppointmentsByTheraphyByPatientId(@PathVariable Integer patientId, Pageable pageable) {
-//        return mapper.modelListPage(appointmentService.getAppointmentsByTheraphyByPatientId(patientId),pageable);
-//    }
-//
-//    @GetMapping("appointment/theraphy-physiotherapist/{physiotherapistId}")
-//    public Page<AppointmentResource> getAppointmentsByTheraphyByPhysiotherapistId(@PathVariable Integer physiotherapistId, Pageable pageable) {
-//        return mapper.modelListPage(appointmentService.getAppointmentsByTheraphyByPhysiotherapistId(physiotherapistId), pageable);
-//    }
-
-//    @RequestMapping(value = "getAppointmentByPhysiotherapistId/{physiotherapistId}", method = RequestMethod.GET)
-//    public Appointment getAppointmentByPhysiotherapist(@PathVariable Integer physiotherapistId){
-//        Physiotherapist physiotherapist = this.getPhysiotherapistById(physiotherapistId);
-////        HttpHeaders headers = new HttpHeaders();
-////        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-////        HttpEntity<Physiotherapist> entity = new HttpEntity<>(physiotherapist, headers);
-////
-////        ResponseEntity<String> updateResponse = restTemplate.exchange(
-////                "http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId,
-////                HttpMethod.GET,
-////                entity,
-////                String.class
-////        );
-//        //restTemplate.getForObject("http://localhost:7007/api/v1/appointments/" + 1, Appointment.class);
-//        return physiotherapist.getAppointment();
-//    }
-
-
-
-
-//    @RequestMapping(value = "getPhysiotherapistById/{physiotherapistId}", method = RequestMethod.GET)
-//     public String getPhysiotherapistById(@PathVariable Integer physiotherapistId){
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//        HttpEntity<String> entity = new HttpEntity<>(headers);
-//        return restTemplate.exchange("http://localhost:7008/api/v1/physiotherapists/"  + physiotherapistId, HttpMethod.GET, entity, String.class).getBody();
-//    }
-
-//
-//    @RequestMapping(value = "getPhysiotherapistById/{physiotherapistId}", method = RequestMethod.GET)
-//    public Physiotherapist getPhysiotherapistById(@PathVariable Integer physiotherapistId){
-////        HttpHeaders headers = new HttpHeaders();
-////        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-////        HttpEntity<String> entity = new HttpEntity<>(headers);
-////        return restTemplate.exchange("http://localhost:7008/api/v1/physiotherapists/"  + physiotherapistId, HttpMethod.GET, entity, String.class).getBody();
-////
-//        Physiotherapist physiotherapist = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/"  + physiotherapistId, Physiotherapist.class);
-//        return physiotherapist;
-//    }
-
-
-//    @RequestMapping(value = "getPhysiotherapistById/{physiotherapistId}", method = RequestMethod.GET)
-//    public Appointment getAppointment(@PathVariable Integer physiotherapistId){
-////        HttpHeaders headers = new HttpHeaders();
-////        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-////        HttpEntity<String> entity = new HttpEntity<>(headers);
-////        return restTemplate.exchange("http://localhost:7008/api/v1/physiotherapists/"  + physiotherapistId, HttpMethod.GET, entity, String.class).getBody();
-////
-//        Appointment appointment = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/"  + physiotherapistId, Appointment.class);
-//        return appointment;
-//    }
-
-
-//    @RequestMapping(value = "getPhysiotherapistById/{physiotherapistId}", method = RequestMethod.GET)
-//    public Theraphy getAppointment(@PathVariable Integer physiotherapistId){
-////        HttpHeaders headers = new HttpHeaders();
-////        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-////        HttpEntity<String> entity = new HttpEntity<>(headers);
-////        return restTemplate.exchange("http://localhost:7008/api/v1/physiotherapists/"  + physiotherapistId, HttpMethod.GET, entity, String.class).getBody();
-////
-//        return
-//
-//        Theraphy theraphy = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/"  + physiotherapistId, Theraphy.class);
-//        return theraphy;
-//    }
 
     @GetMapping("/therapy/{physiotherapistId}/{therapyId}")
     public ResponseDTO getTherapyPhysiotherapistId(@PathVariable Integer physiotherapistId, @PathVariable Integer therapyId){
