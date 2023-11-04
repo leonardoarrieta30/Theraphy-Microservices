@@ -44,11 +44,17 @@ public class Physiotherapist {
     @Column(name = "years_experience")
     private Integer yearsExperience;
 
-    private Double fees;
-
-//    @OneToOne
+    //    @OneToOne
 //    @JoinColumn(name = "user_id")
 //    @JsonIgnore
 //    private User user;
 
+    private Double fees;
+
+
+
+
+
+
+    
 }
