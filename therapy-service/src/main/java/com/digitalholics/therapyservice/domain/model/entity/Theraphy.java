@@ -53,5 +53,4 @@ public class Theraphy {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER, mappedBy = "theraphy")
     private Set<Treatment> treatments = new HashSet<>();
-
 }
