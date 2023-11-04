@@ -75,6 +75,17 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public ResponseEntity<?> delete(Integer patientId) {
+        return patientRepository.findById(patientId)
+                .map(patient -> {
+                    patientRepository.delete(patient);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));
+    }
+
+    
+
+    @Override
     public Patient update(Integer patientId, Patient request) {
         Set<ConstraintViolation<Patient>> violations = validator.validate(request);
 
@@ -90,14 +101,5 @@ public class PatientServiceImpl implements PatientService {
                                 .withAppointmentQuantity(request.getAppointmentQuantity())
                                 .withLocation(request.getLocation())
                 )).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));
-    }
-
-    @Override
-    public ResponseEntity<?> delete(Integer patientId) {
-        return patientRepository.findById(patientId)
-                .map(patient -> {
-                    patientRepository.delete(patient);
-                    return ResponseEntity.ok().build();
-                }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));
     }
 }
