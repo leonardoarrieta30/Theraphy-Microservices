@@ -24,5 +24,5 @@ public class CreateTheraphyResource {
     private String finishAt;
 
     private Integer physiotherapistId;
-    //private Integer patientId;
+    private Integer patientId;
 }

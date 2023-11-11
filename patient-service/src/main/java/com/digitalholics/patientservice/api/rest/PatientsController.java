@@ -1,9 +1,8 @@
 package com.digitalholics.patientservice.api.rest;
 
-import com.digitalholics.patientservice.domain.model.entity.Patient;
 import com.digitalholics.patientservice.domain.model.entity.dto.Appointment;
 import com.digitalholics.patientservice.domain.model.entity.dto.ResponseDTO;
-import com.digitalholics.patientservice.domain.model.entity.dto.Theraphy;
+import com.digitalholics.patientservice.domain.model.entity.dto.Therapy;
 import com.digitalholics.patientservice.domain.service.PatientService;
 import com.digitalholics.patientservice.mapping.PatientMapper;
 import com.digitalholics.patientservice.resource.CreatePatientResource;
@@ -61,9 +60,9 @@ public class PatientsController {
     }
 
     @RequestMapping(value = "getTheraphyById/{theraphyId}", method = RequestMethod.GET)
-    public Theraphy getTheraphyById(@PathVariable Integer theraphyId){
-        Theraphy theraphy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + theraphyId, Theraphy.class);
-        return theraphy;
+    public Therapy getTheraphyById(@PathVariable Integer theraphyId){
+        Therapy therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + theraphyId, Therapy.class);
+        return therapy;
     }
 
     @RequestMapping(value = "getAppointmentById/{appointmentId}", method = RequestMethod.GET)
@@ -77,14 +76,25 @@ public class PatientsController {
         ResponseDTO responseDTO = new ResponseDTO();
 //        Patient patient;
 //        patient = patientService.getById(patientId);
-        ResponseEntity<Theraphy> responseEntity = restTemplate.getForEntity("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy.class);
+        ResponseEntity<Therapy> responseEntity = restTemplate.getForEntity("http://localhost:7009/api/v1/theraphies/" + therapyId, Therapy.class);
 
-        Theraphy theraphy = responseEntity.getBody();
+        Therapy therapy = responseEntity.getBody();
 
-        responseDTO.setTheraphy(theraphy);
+        responseDTO.setTherapy(therapy);
         //responseDTO.setAppointment(appointment);
 
         return responseDTO;
+    }
+
+
+
+    @PostMapping("/saveTherapy/{patientId}")
+    public ResponseEntity<Therapy> saveTherapy(@PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
+        if(patientService.getById(patientId) == null){
+            return ResponseEntity.notFound().build();
+        }
+        Therapy newTherapy = patientService.saveTherapy(patientId, therapy);
+        return ResponseEntity.ok(therapy);
     }
 
 }

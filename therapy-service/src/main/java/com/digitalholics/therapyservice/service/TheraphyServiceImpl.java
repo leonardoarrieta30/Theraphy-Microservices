@@ -75,6 +75,7 @@ public class TheraphyServiceImpl implements TheraphyService {
         theraphy.setStartAt(theraphyResource.getStartAt());
         theraphy.setFinishAt(theraphyResource.getFinishAt());
         theraphy.setPhysiotherapistId(theraphyResource.getPhysiotherapistId());
+        theraphy.setPatientId(theraphyResource.getPatientId());
 
 
        return theraphyRepository.save(theraphy);

@@ -58,8 +58,8 @@ public class Theraphy {
     @Column(name = "physiotherapist_id")
     private Integer physiotherapistId;
 
-//    @Column(name = "patient_id")
-//    private Integer patientId;
+    @Column(name = "patient_id")
+    private Integer patientId;
 
 
 

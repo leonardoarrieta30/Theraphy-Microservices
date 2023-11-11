@@ -112,8 +112,9 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));    }
 
 
-    public Therapy saveTherapy(Integer physiotherapistId, Therapy therapy){
+    public Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId,Integer patientId, Therapy therapy){
         therapy.setPhysiotherapistId(physiotherapistId);
+        therapy.setPatientId(patientId);
         Therapy newTherapy = therapyFeignClient.save(therapy);
         return newTherapy;
     }

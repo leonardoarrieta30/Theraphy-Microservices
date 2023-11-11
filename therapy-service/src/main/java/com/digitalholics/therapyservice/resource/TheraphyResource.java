@@ -15,7 +15,7 @@ public class TheraphyResource {
     private String startAt;
     private String finishAt;
     //private Integer appointmentId;
-    //private Integer patientId;
+    private Integer patientId;
     private Integer physiotherapistId;
 //    private PatientResource patient;
 //    private PhysiotherapistResource physiotherapist;

@@ -59,12 +59,12 @@ public class PhysiotherapistController {
     }
 
 
-    @PostMapping("/saveTherapy/{physiotherapistId}")
-    public ResponseEntity<Therapy> saveTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId, @RequestBody Therapy therapy){
+    @PostMapping("/saveTherapy/{physiotherapistId}/{patientId}")
+    public ResponseEntity<Therapy> saveTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId, @PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
         if(physiotherapistService.getById(physiotherapistId) == null){
             return ResponseEntity.notFound().build();
         }
-        Therapy newTherapy = physiotherapistService.saveTherapy(physiotherapistId, therapy);
+        Therapy newTherapy = physiotherapistService.saveTherapyToPatientAndPhysiotherapist(physiotherapistId, patientId,therapy);
         return ResponseEntity.ok(therapy);
     }
 

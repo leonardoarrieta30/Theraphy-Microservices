@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 public class ResponseDTO {
     //private Appointment appointment;
-    private Theraphy theraphy;
+    private Therapy therapy;
     private Patient patient;
 }

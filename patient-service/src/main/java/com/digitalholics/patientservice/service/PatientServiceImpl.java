@@ -1,14 +1,17 @@
 package com.digitalholics.patientservice.service;
 
 import com.digitalholics.patientservice.domain.model.entity.Patient;
+import com.digitalholics.patientservice.domain.model.entity.dto.Therapy;
 import com.digitalholics.patientservice.domain.persistence.PatientRepository;
 import com.digitalholics.patientservice.domain.service.PatientService;
+import com.digitalholics.patientservice.feignsClients.TherapyFeignClient;
 import com.digitalholics.patientservice.mapping.Exception.ResourceNotFoundException;
 import com.digitalholics.patientservice.mapping.Exception.ResourceValidationException;
 import com.digitalholics.patientservice.resource.CreatePatientResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +30,14 @@ public class PatientServiceImpl implements PatientService {
 
     private final Validator validator;
 
-    public PatientServiceImpl(PatientRepository patientRepository, Validator validator) {
+
+    private final TherapyFeignClient therapyFeignClient;
+
+    @Autowired
+    public PatientServiceImpl(PatientRepository patientRepository, Validator validator, TherapyFeignClient therapyFeignClient) {
         this.patientRepository = patientRepository;
         this.validator = validator;
+        this.therapyFeignClient = therapyFeignClient;
     }
 
     @Override
@@ -100,4 +108,12 @@ public class PatientServiceImpl implements PatientService {
                     return ResponseEntity.ok().build();
                 }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));
     }
+
+
+    public Therapy saveTherapy(Integer patientId, Therapy therapy){
+        therapy.setPatientId(patientId);
+        Therapy newTherapy = therapyFeignClient.save(therapy);
+        return newTherapy;
+    }
+
 }

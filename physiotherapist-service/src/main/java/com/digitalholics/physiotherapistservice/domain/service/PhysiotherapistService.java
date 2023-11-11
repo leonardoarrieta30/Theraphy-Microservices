@@ -17,6 +17,6 @@ public interface PhysiotherapistService {
     Physiotherapist create(CreatePhysiotherapistResource physiotherapist);
     Physiotherapist update(Integer physiotherapistId, UpdatePhysiotherapistResource request);
     ResponseEntity<?> delete(Integer physiotherapistId);
-    Therapy saveTherapy(Integer physiotherapistId, Therapy therapy);
+    Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId, Integer patientId, Therapy therapy);
     Therapy getTherapyByPhysiotherapistId(Integer physiotherapistId);
 }
