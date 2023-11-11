@@ -14,5 +14,8 @@ public interface TheraphyRepository extends JpaRepository<Theraphy, Integer> {
     //Theraphy findByAppointmentId(Integer appointmentId);
     Theraphy findTheraphyByPhysiotherapistId(Integer physiotherapistId);
     List<Theraphy> findTheraphiesByPhysiotherapistId(Integer physiotherapistId);
+
+    List<Theraphy> findTheraphiesByPatientId(Integer patientId);
+
    // Theraphy findByPatientId(Integer patientId);
 }

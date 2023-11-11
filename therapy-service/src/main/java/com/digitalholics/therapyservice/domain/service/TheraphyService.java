@@ -23,6 +23,9 @@ public interface TheraphyService {
     //Theraphy byAppointmentId(Integer appointmentId);
     Theraphy getTherapyByPhysiotherapistId(Integer physiotherapistId);
     List<Theraphy> getTherapiesByPhysiotherapistId(Integer physiotherapistId);
+
+    List<Theraphy> getTherapiesByPatientId(Integer patientId);
+
     //Theraphy byPatientId(Integer patientId);
 
 

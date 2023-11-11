@@ -122,9 +122,11 @@ public class TheraphyServiceImpl implements TheraphyService {
     public List<Theraphy> getTherapiesByPhysiotherapistId(Integer physiotherapistId){
         return theraphyRepository.findTheraphiesByPhysiotherapistId(physiotherapistId);
     }
-//    public Theraphy byPatientId(Integer patientId) {
-//        return theraphyRepository.findByPatientId(patientId);
-//    }
+
+
+    public List<Theraphy> getTherapiesByPatientId(Integer patientId) {
+        return theraphyRepository.findTheraphiesByPatientId(patientId);
+    }
 
 
 

@@ -67,7 +67,7 @@ public class TheraphiesController {
 //        Theraphy therapy = theraphyService.getTherapyByPhysiotherapistId(PhysiotherapistId);
 //        return mapper.toResource(therapy);
 //    }
-    @GetMapping("/getTherapiesByPhysiotherapist/{physiotherapistId}")
+    @GetMapping("/getTherapiesByPhysiotherapistId/{physiotherapistId}")
     public List<Theraphy> getTherapiesByPhysiotherapistId(@PathVariable("physiotherapistId") Integer PhysiotherapistId){
         List<Theraphy> listTherapy = theraphyService.getTherapiesByPhysiotherapistId(PhysiotherapistId);
         return listTherapy;
@@ -76,11 +76,11 @@ public class TheraphiesController {
 
 
 
-//    @GetMapping("/byPatient/{patientId}")
-//    public ResponseEntity<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){
-//        Theraphy theraphy = theraphyService.byPatientId(patientId);
-//        return ResponseEntity.ok(theraphy);
-//    }
+    @GetMapping("/getTherapiesByPatientId/{patientId}")
+    public List<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){
+        List<Theraphy> listTherapy = theraphyService.getTherapiesByPatientId(patientId);
+        return listTherapy;
+    }
 
 
 }
