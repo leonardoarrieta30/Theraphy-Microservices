@@ -7,6 +7,7 @@ import com.digitalholics.therapyservice.domain.service.TheraphyService;
 import com.digitalholics.therapyservice.mapping.Exception.ResourceNotFoundException;
 import com.digitalholics.therapyservice.mapping.Exception.ResourceValidationException;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
+import com.digitalholics.therapyservice.resource.TheraphyResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.data.domain.Page;
@@ -73,6 +74,7 @@ public class TheraphyServiceImpl implements TheraphyService {
         theraphy.setAppointmentGap(theraphyResource.getAppointmentGap());
         theraphy.setStartAt(theraphyResource.getStartAt());
         theraphy.setFinishAt(theraphyResource.getFinishAt());
+        theraphy.setPhysiotherapistId(theraphyResource.getPhysiotherapistId());
 
 
        return theraphyRepository.save(theraphy);
@@ -105,6 +107,20 @@ public class TheraphyServiceImpl implements TheraphyService {
                     return ResponseEntity.ok().build();
                 }).orElseThrow(()-> new ResourceNotFoundException(ENTITY, theraphyId));
     }
+
+//    public Theraphy byAppointmentId(Integer appointmentId) {
+//        return theraphyRepository.findByAppointmentId(appointmentId);
+//    }
+
+
+    public Theraphy byPhysiotherapistId(Integer physiotherapistId) {
+        return theraphyRepository.findByPhysiotherapistId(physiotherapistId);
+    }
+//    public Theraphy byPatientId(Integer patientId) {
+//        return theraphyRepository.findByPatientId(patientId);
+//    }
+
+
 
 
 }

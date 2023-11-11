@@ -77,10 +77,10 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
 
 
-    @Override
-    public List<Treatment> getTreatmentByTheraphyId(Integer theraphyId) {
-        return treatmentRepository.findTreatmentByTheraphyId(theraphyId);
-    }
+//    @Override
+//    public List<Treatment> getTreatmentByTheraphyId(Integer theraphyId) {
+//        return treatmentRepository.findTreatmentByTheraphyId(theraphyId);
+//    }
 
     @Override
     public Treatment update(Integer treatmentId, Treatment request) {

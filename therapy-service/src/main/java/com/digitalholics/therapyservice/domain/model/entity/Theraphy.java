@@ -50,8 +50,17 @@ public class Theraphy {
     @Column(name = "finish_at")
     private String finishAt;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, mappedBy = "theraphy")
-    private Set<Treatment> treatments = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER, mappedBy = "theraphy")
+//    private Set<Treatment> treatments = new HashSet<>();
+
+    //private Integer appointmentId;
+    @Column(name = "physiotherapist_id")
+    private Integer physiotherapistId;
+
+//    @Column(name = "patient_id")
+//    private Integer patientId;
+
+
 
 }

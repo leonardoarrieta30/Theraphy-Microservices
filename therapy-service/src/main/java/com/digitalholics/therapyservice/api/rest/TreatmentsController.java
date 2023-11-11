@@ -46,10 +46,10 @@ public class TreatmentsController {
         return mapper.toResource(treatmentService.getById(treatmentId));
     }
 
-    @GetMapping("treatment/{theraphyId}")
-    public Page<TreatmentResource> getTreatmentByTheraphyId(@PathVariable Integer theraphyId, Pageable pageable){
-        return mapper.modelListPage(treatmentService.getTreatmentByTheraphyId(theraphyId), pageable);
-    }
+//    @GetMapping("treatment/{theraphyId}")
+//    public Page<TreatmentResource> getTreatmentByTheraphyId(@PathVariable Integer theraphyId, Pageable pageable){
+//        return mapper.modelListPage(treatmentService.getTreatmentByTheraphyId(theraphyId), pageable);
+//    }
 
     @DeleteMapping("{treatmentId}")
     public ResponseEntity<?> deleteTreatment(@PathVariable Integer treatmentId) {

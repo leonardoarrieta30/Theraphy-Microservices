@@ -49,11 +49,11 @@ public class Treatment {
     @Column(name = "viewed")
     private Boolean viewed;
 
-
-    @ManyToOne
-    @JoinColumn(name = "theraphy_id")
-    @JsonIgnore
-    private Theraphy theraphy;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "theraphy_id")
+//    @JsonIgnore
+//    private Theraphy theraphy;
 
 
 }

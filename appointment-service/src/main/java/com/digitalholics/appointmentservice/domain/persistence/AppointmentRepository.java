@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    Appointment findAppointmentByTheraphyId(Integer theraphyId);
+   // Appointment findAppointmentByTheraphyId(Integer theraphyId);
     Appointment findByTopic(String topic);
 
 

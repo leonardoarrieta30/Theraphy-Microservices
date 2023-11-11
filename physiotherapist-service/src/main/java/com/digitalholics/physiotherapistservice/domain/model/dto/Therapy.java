@@ -1,22 +1,20 @@
-package com.digitalholics.therapyservice.resource;
+package com.digitalholics.physiotherapistservice.domain.model.dto;
 
+import jakarta.persistence.JoinColumn;
 import lombok.*;
 
 @Getter
 @Setter
-@With
 @NoArgsConstructor
 @AllArgsConstructor
-public class TheraphyResource {
-    private Integer id;
+@Data
+public class Therapy {
     private String theraphyName;
     private String appointmentQuantity;
     private String appointmentGap;
     private String startAt;
     private String finishAt;
     //private Integer appointmentId;
-    //private Integer patientId;
     private Integer physiotherapistId;
-//    private PatientResource patient;
-//    private PhysiotherapistResource physiotherapist;
+    private Integer patientId;
 }

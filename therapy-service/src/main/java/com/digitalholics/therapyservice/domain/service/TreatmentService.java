@@ -18,7 +18,7 @@ public interface TreatmentService {
 
     Treatment create(CreateTreatmentResource treatmentResource);
 
-    List<Treatment> getTreatmentByTheraphyId(Integer theraphyId);
+    //List<Treatment> getTreatmentByTheraphyId(Integer theraphyId);
 
     Treatment update(Integer treatmentId, Treatment request);
 

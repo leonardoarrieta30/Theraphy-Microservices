@@ -1,5 +1,6 @@
 package com.digitalholics.therapyservice.api.rest;
 
+import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
 import com.digitalholics.therapyservice.domain.service.TheraphyService;
 import com.digitalholics.therapyservice.mapping.TheraphyMapper;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
@@ -51,5 +52,24 @@ public class TheraphiesController {
                                                  @RequestBody UpdateTheraphyResource resource) {
         return mapper.toResource(theraphyService.update(theraphyId, mapper.toModel(resource)));
     }
+
+//    @GetMapping("/byAppointment/{appointmentId}")
+//    public ResponseEntity<Theraphy> getByTherapyAppointmentId(@PathVariable("appointmentId") Integer appointmentId) {
+//        Theraphy theraphy = theraphyService.byAppointmentId(appointmentId);
+//        return ResponseEntity.ok(theraphy);
+//    }
+
+    @GetMapping("/byPhysiotherapist/{physiotherapistId}")
+    public ResponseEntity<Theraphy> getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer PhysiotherapistId){
+        Theraphy theraphy = theraphyService.byPhysiotherapistId(PhysiotherapistId);
+        return ResponseEntity.ok(theraphy);
+    }
+
+//    @GetMapping("/byPatient/{patientId}")
+//    public ResponseEntity<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){
+//        Theraphy theraphy = theraphyService.byPatientId(patientId);
+//        return ResponseEntity.ok(theraphy);
+//    }
+
 
 }

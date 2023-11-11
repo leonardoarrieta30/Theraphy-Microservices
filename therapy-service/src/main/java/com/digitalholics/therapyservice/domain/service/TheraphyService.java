@@ -19,6 +19,11 @@ public interface TheraphyService {
 
     Page<Theraphy> getAll(Pageable pageable);
 
+    //Theraphy byAppointmentId(Integer appointmentId);
+    Theraphy byPhysiotherapistId(Integer physiotherapistId);
+    //Theraphy byPatientId(Integer patientId);
+
+
     Theraphy getById(Integer theraphyId);
 
     Theraphy update(Integer theraphyId, Theraphy request);

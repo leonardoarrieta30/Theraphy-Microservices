@@ -45,10 +45,10 @@ public class AppointmentsController {
         return mapper.toResource(appointmentService.getById(appointmentId));
     }
 
-    @GetMapping("appointment/{theraphyId}")
-    public AppointmentResource getAppointmentByTheraphyId(@PathVariable Integer theraphyId) {
-        return mapper.toResource(appointmentService.getAppointmentByTheraphyId(theraphyId));
-    }
+//    @GetMapping("appointment/{theraphyId}")
+//    public AppointmentResource getAppointmentByTheraphyId(@PathVariable Integer theraphyId) {
+//        return mapper.toResource(appointmentService.getAppointmentByTheraphyId(theraphyId));
+//    }
 
     @PostMapping("create_appointment")
     public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource) {
@@ -66,6 +66,15 @@ public class AppointmentsController {
         return appointmentService.delete(appointmentId);
     }
 
+    @GetMapping("/therapy/{appointmentId}")
+    public ResponseEntity<Theraphy2> getTherapy(@PathVariable("appointmentId") Integer appointmentId){
+        Appointment appointment = appointmentService.getById(appointmentId);
+        if(appointment == null)
+            return ResponseEntity.notFound().build();
+
+        Theraphy2 therapy = appointmentService.getTherapy(appointmentId);
+        return ResponseEntity.ok(therapy);
+    }
 
 //
 //    @GetMapping("appointment/theraphy-patient/{patientId}")
@@ -163,6 +172,13 @@ public class AppointmentsController {
         responseDTO.setTheraphy2(theraphy2);
 
         return responseDTO;
+    }
+
+
+    @PostMapping("/saveTherapy/{appointmentId}")
+    public ResponseEntity<Theraphy2> saveTherapy(@PathVariable("appointmentId") Integer appointmentId, @RequestBody Theraphy2 theraphy2){
+        Theraphy2 theraphy2New = appointmentService.saveTherapy(appointmentId,theraphy2);
+        return ResponseEntity.ok(theraphy2);
     }
 
 

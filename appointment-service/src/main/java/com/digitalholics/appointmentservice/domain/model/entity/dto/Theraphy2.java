@@ -23,6 +23,7 @@ public class Theraphy2 {
     private String appointmentGap;
     private String startAt;
     private String finishAt;
+    private Integer appointmentId;
 
 
 

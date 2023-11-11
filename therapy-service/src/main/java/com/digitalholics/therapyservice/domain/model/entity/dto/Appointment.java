@@ -1,27 +1,19 @@
-package com.digitalholics.appointmentservice.resource;
+package com.digitalholics.therapyservice.domain.model.entity.dto;
 
-
-import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
-@With
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateAppointmentResource {
-
+@Data
+public class Appointment {
     private Integer id;
     private Boolean done;
-
     private String topic;
     private String diagnosis;
-
     private String date;
-
     private String hour;
-
     private String place;
-
-
+    private Integer therapyId;
 }

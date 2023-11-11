@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TreatmentRepository extends JpaRepository<Treatment, Integer> {
 
-    List<Treatment> findTreatmentByTheraphyId(Integer theraphyId);
+   // List<Treatment> findTreatmentByTheraphyId(Integer theraphyId);
 
 }

@@ -2,6 +2,8 @@ package com.digitalholics.physiotherapistservice.api.rest;
 
 
 
+import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
+import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
 import com.digitalholics.physiotherapistservice.domain.service.PhysiotherapistService;
 import com.digitalholics.physiotherapistservice.mapping.PhysiotherapistMapper;
 import com.digitalholics.physiotherapistservice.resources.CreatePhysiotherapistResource;
@@ -31,7 +33,7 @@ public class PhysiotherapistController {
     public Page<PhysiotherapistResource> getAllPhysiotherapist(Pageable pageable) {
         return mapper.modelListPage(physiotherapistService.getAll(), pageable);
     }
-    
+
     @PostMapping("registration-physiotherapist")
     public ResponseEntity<PhysiotherapistResource> createPhysiotherapist(@RequestBody CreatePhysiotherapistResource resource) {
         return new ResponseEntity<>(mapper.toResource(physiotherapistService.create(resource)), HttpStatus.CREATED);
@@ -55,4 +57,23 @@ public class PhysiotherapistController {
     public ResponseEntity<?> deletePhysiotherapist(@PathVariable Integer physiotherapistId) {
         return physiotherapistService.delete(physiotherapistId);
     }
+
+
+    @PostMapping("/saveTherapy/{physiotherapistId}")
+    public ResponseEntity<Therapy> saveTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId, @RequestBody Therapy therapy){
+        if(physiotherapistService.getById(physiotherapistId) == null){
+            return ResponseEntity.notFound().build();
+        }
+        Therapy newTherapy = physiotherapistService.saveTherapy(physiotherapistId, therapy);
+        return ResponseEntity.ok(therapy);
+    }
+
+
+    @GetMapping("/getTherapy/{physiotherapistId}")
+    public ResponseEntity<Therapy> getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer physiotherapistId){
+        Therapy therapy = physiotherapistService.getTherapyByPhysiotherapistId(physiotherapistId);
+        return ResponseEntity.ok(therapy);
+    }
+
+
 }

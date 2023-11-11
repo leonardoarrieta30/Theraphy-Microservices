@@ -1,13 +1,16 @@
 package com.digitalholics.physiotherapistservice.service;
 
+import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
 import com.digitalholics.physiotherapistservice.domain.persistence.PhysiotherapistRepository;
 import com.digitalholics.physiotherapistservice.domain.service.PhysiotherapistService;
+import com.digitalholics.physiotherapistservice.feignClients.TherapyFeignClient;
 import com.digitalholics.physiotherapistservice.mapping.exception.ResourceNotFoundException;
 import com.digitalholics.physiotherapistservice.mapping.exception.ResourceValidationException;
 import com.digitalholics.physiotherapistservice.resources.CreatePhysiotherapistResource;
 import com.digitalholics.physiotherapistservice.resources.UpdatePhysiotherapistResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +32,13 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     private final Validator validator;
 
-    public PhysiotherapistServiceImpl(PhysiotherapistRepository physiotherapistRepository, Validator validator) {
+    private final TherapyFeignClient therapyFeignClient;
+
+    @Autowired
+    public PhysiotherapistServiceImpl(PhysiotherapistRepository physiotherapistRepository, Validator validator, TherapyFeignClient therapyFeignClient) {
         this.physiotherapistRepository = physiotherapistRepository;
         this.validator = validator;
+        this.therapyFeignClient = therapyFeignClient;
     }
 
     @Override
@@ -45,9 +52,9 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
     }
 
     @Override
-    public Physiotherapist getById(Integer patientId) {
-        return physiotherapistRepository.findById(patientId)
-                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, patientId));    }
+    public Physiotherapist getById(Integer physiotherapistId) {
+        return physiotherapistRepository.findById(physiotherapistId)
+                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, physiotherapistId));    }
 
     @Override
     public Physiotherapist create(CreatePhysiotherapistResource physiotherapistResource) {
@@ -103,4 +110,21 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
             physiotherapistRepository.delete(physiotherapist);
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));    }
+
+
+    public Therapy saveTherapy(Integer physiotherapistId, Therapy therapy){
+        therapy.setPhysiotherapistId(physiotherapistId);
+        Therapy newTherapy = therapyFeignClient.save(therapy);
+        return newTherapy;
+    }
+
+
+    public Therapy getTherapyByPhysiotherapistId(Integer physiotherapistId){
+        Physiotherapist physiotherapist = physiotherapistRepository.findById(physiotherapistId).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));
+
+        return therapyFeignClient.getTherapy(physiotherapistId);
+    }
+
+
+
 }
