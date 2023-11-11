@@ -83,7 +83,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment create(CreateAppointmentResource appointmentResource) {
+    public Appointment create(CreateAppointmentResource appointmentResource, Integer therapyId) {
         Set<ConstraintViolation<CreateAppointmentResource>> violations = validator.validate(appointmentResource);
 
         if(!violations.isEmpty())
@@ -97,6 +97,13 @@ public class AppointmentServiceImpl implements AppointmentService {
                     "A Appointment with the same topic already exists.");
 
         Appointment appointment = new Appointment();
+        appointment.setHour(appointmentResource.getHour());
+        appointment.setDate(appointmentResource.getDate());
+        appointment.setDone(appointmentResource.getDone());
+        appointment.setPlace(appointmentResource.getPlace());
+        appointment.setDiagnosis(appointmentResource.getDiagnosis());
+        appointment.setTopic(appointmentResource.getTopic());
+        appointment.setTherapyId(therapyId);
 
         return appointmentRepository.save(appointment);
 
@@ -111,16 +118,27 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-    public Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2){
-        theraphy2.setAppointmentId(appointmentId);
-        Theraphy2 theraphy2New = therapyFeignClient.save(theraphy2);
-        return theraphy2New;
-    }
+//    public Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2){
+//        theraphy2.setAppointmentId(appointmentId);
+//        Theraphy2 theraphy2New = therapyFeignClient.save(theraphy2);
+//        return theraphy2New;
+//    }
 
 
-    public Theraphy2 getTherapy(Integer appointmentId) {
-        Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/byAppointment/" + appointmentId, Theraphy2.class);
+    public Theraphy2 getTherapyByAppointmentId(Integer appointmentId) {
+        Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
         return theraphy2;
     }
+
+    public List<Appointment> getAppointmentsByTherapyId(Integer therapyId){
+        return appointmentRepository.findAppointmentsByTherapyId(therapyId);
+    }
+
+    public Theraphy2 getTherapyById(Integer therapyId){
+        Theraphy2 therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy2.class);
+        return therapy;
+    }
+
+
 
 }

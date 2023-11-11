@@ -2,6 +2,7 @@ package com.digitalholics.therapyservice.service;
 
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Appointment;
 import com.digitalholics.therapyservice.domain.persistence.TheraphyRepository;
 import com.digitalholics.therapyservice.domain.service.TheraphyService;
 import com.digitalholics.therapyservice.mapping.Exception.ResourceNotFoundException;
@@ -10,13 +11,16 @@ import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
 import com.digitalholics.therapyservice.resource.TheraphyResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -30,14 +34,16 @@ public class TheraphyServiceImpl implements TheraphyService {
 
 
 
-
+    private final RestTemplate restTemplate;
 
     private final Validator validator;
 
-    
-    public TheraphyServiceImpl(TheraphyRepository theraphyRepository, Validator validator) {
+
+    @Autowired
+    public TheraphyServiceImpl(TheraphyRepository theraphyRepository, Validator validator, RestTemplate restTemplate) {
         this.theraphyRepository = theraphyRepository;
         this.validator = validator;
+        this.restTemplate = restTemplate;
     }
 
 
@@ -128,6 +134,11 @@ public class TheraphyServiceImpl implements TheraphyService {
         return theraphyRepository.findTheraphiesByPatientId(patientId);
     }
 
+//    public List<Appointment> getAppointmentsByTherapyId(Integer therapyId) {
+//        List<Appointment> appointments = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/getAppointmentsByTherapyId/" + therapyId, Appointment.class);
+//        return appointments;
+//    }
+//
 
 
 

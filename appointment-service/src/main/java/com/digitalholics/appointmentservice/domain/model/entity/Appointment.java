@@ -15,31 +15,19 @@ import lombok.*;
 @Entity
 @Table(name = "appointments")
 public class Appointment {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-
     private Boolean done;
-
-
     private String topic;
-
-
     private String diagnosis;
-
     @NotNull
-    @NotBlank
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String date;
-
-
     private String hour;
-
-
     private String place;
+    @Column(name = "therapy_id")
+    private Integer therapyId;
 
 //
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)

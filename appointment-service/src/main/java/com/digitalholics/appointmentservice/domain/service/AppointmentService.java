@@ -23,12 +23,15 @@ public interface AppointmentService {
 
     //Appointment getAppointmentByTheraphyId(Integer theraphyId);
 
-    Appointment create(CreateAppointmentResource appointment);
+    Appointment create(CreateAppointmentResource appointment, Integer therapyId);
 
     ResponseEntity<?> delete(Integer appointmentId);
-    Theraphy2 getTherapy(Integer appointmentId);
+    Theraphy2 getTherapyByAppointmentId(Integer appointmentId);
+
+    List<Appointment> getAppointmentsByTherapyId(Integer therapyId);
     Appointment update(Integer appointmentId, Appointment request);
 
-    Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2);
+    Theraphy2 getTherapyById(Integer patientId);
+   // Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2);
 
 }

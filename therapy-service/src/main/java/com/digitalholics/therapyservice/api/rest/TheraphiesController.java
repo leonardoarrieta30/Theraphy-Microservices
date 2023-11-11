@@ -1,6 +1,7 @@
 package com.digitalholics.therapyservice.api.rest;
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Appointment;
 import com.digitalholics.therapyservice.domain.service.TheraphyService;
 import com.digitalholics.therapyservice.mapping.TheraphyMapper;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -55,7 +57,7 @@ public class TheraphiesController {
         return mapper.toResource(theraphyService.update(theraphyId, mapper.toModel(resource)));
     }
 
-//    @GetMapping("/byAppointment/{appointmentId}")
+//    @GetMapping("/getTherapyByAppointment/{appointmentId}")
 //    public ResponseEntity<Theraphy> getByTherapyAppointmentId(@PathVariable("appointmentId") Integer appointmentId) {
 //        Theraphy theraphy = theraphyService.byAppointmentId(appointmentId);
 //        return ResponseEntity.ok(theraphy);
@@ -81,6 +83,13 @@ public class TheraphiesController {
         List<Theraphy> listTherapy = theraphyService.getTherapiesByPatientId(patientId);
         return listTherapy;
     }
+
+
+    //tengo lo mismo en appointment controller de appointment service
+//    @GetMapping("/getAppointmentsByTherapyId/{therapyId}")
+//    public List<Appointment> getAppointmentsByTherapyId(@PathVariable("therapyId") Integer therapyId) {
+//       return theraphyService.getAppointmentsByTherapyId(therapyId);
+//    }
 
 
 }

@@ -19,6 +19,8 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/appointments", produces = "application/json")
 @Tag(name = "Appointments", description = "Create, read, update and delete appointments")
@@ -50,9 +52,12 @@ public class AppointmentsController {
 //        return mapper.toResource(appointmentService.getAppointmentByTheraphyId(theraphyId));
 //    }
 
-    @PostMapping("create_appointment")
-    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource) {
-        return new ResponseEntity<>(mapper.toResource(appointmentService.create((resource))), HttpStatus.CREATED);
+    @PostMapping("create_appointment/{therapyId}")
+    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource, @PathVariable("therapyId") Integer therapyId) {
+        if(appointmentService.getTherapyById(therapyId) == null){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<>(mapper.toResource(appointmentService.create((resource),therapyId)), HttpStatus.CREATED);
     }
 
     @PutMapping("{appointmentId}")
@@ -67,12 +72,12 @@ public class AppointmentsController {
     }
 
     @GetMapping("/therapy/{appointmentId}")
-    public ResponseEntity<Theraphy2> getTherapy(@PathVariable("appointmentId") Integer appointmentId){
+    public ResponseEntity<Theraphy2> getTherapyByAppointmentId(@PathVariable("appointmentId") Integer appointmentId){
         Appointment appointment = appointmentService.getById(appointmentId);
         if(appointment == null)
             return ResponseEntity.notFound().build();
 
-        Theraphy2 therapy = appointmentService.getTherapy(appointmentId);
+        Theraphy2 therapy = appointmentService.getTherapyByAppointmentId(appointmentId);
         return ResponseEntity.ok(therapy);
     }
 
@@ -175,11 +180,18 @@ public class AppointmentsController {
     }
 
 
-    @PostMapping("/saveTherapy/{appointmentId}")
-    public ResponseEntity<Theraphy2> saveTherapy(@PathVariable("appointmentId") Integer appointmentId, @RequestBody Theraphy2 theraphy2){
-        Theraphy2 theraphy2New = appointmentService.saveTherapy(appointmentId,theraphy2);
-        return ResponseEntity.ok(theraphy2);
+    @GetMapping("getAppointmentsByTherapyId/{therapyId}")
+    public List<Appointment> getAppointmentsByTherapyId(@PathVariable("therapyId") Integer therapyId){
+        return appointmentService.getAppointmentsByTherapyId(therapyId);
     }
+
+
+
+//    @PostMapping("/saveTherapy/{appointmentId}")
+//    public ResponseEntity<Theraphy2> saveTherapy(@PathVariable("appointmentId") Integer appointmentId, @RequestBody Theraphy2 theraphy2){
+//        Theraphy2 theraphy2New = appointmentService.saveTherapy(appointmentId,theraphy2);
+//        return ResponseEntity.ok(theraphy2);
+//    }
 
 
 

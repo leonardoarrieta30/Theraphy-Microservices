@@ -12,6 +12,7 @@ public interface TherapyFeignClient {
     @PostMapping("/api/v1/theraphies/create-theraphy")
     Therapy save(@RequestBody Therapy therapy);
 
+    //ni lo uso
     @GetMapping("/api/v1/theraphies/byPhysiotherapist/{physiotherapistId}")
     Therapy getTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId);
 

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface TheraphyRepository extends JpaRepository<Theraphy, Integer> {
 
-    //Theraphy findByAppointmentId(Integer appointmentId);
+    //Theraphy findTheraphyByAppointmentId(Integer appointmentId);
     Theraphy findTheraphyByPhysiotherapistId(Integer physiotherapistId);
     List<Theraphy> findTheraphiesByPhysiotherapistId(Integer physiotherapistId);
 
