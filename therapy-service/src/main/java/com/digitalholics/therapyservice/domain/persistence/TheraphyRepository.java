@@ -2,6 +2,7 @@ package com.digitalholics.therapyservice.domain.persistence;
 
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
+import com.digitalholics.therapyservice.resource.TheraphyResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface TheraphyRepository extends JpaRepository<Theraphy, Integer> {
 
     //Theraphy findByAppointmentId(Integer appointmentId);
-    Theraphy findByPhysiotherapistId(Integer physiotherapistId);
+    Theraphy findTheraphyByPhysiotherapistId(Integer physiotherapistId);
+    List<Theraphy> findTheraphiesByPhysiotherapistId(Integer physiotherapistId);
    // Theraphy findByPatientId(Integer patientId);
 }

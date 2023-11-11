@@ -114,8 +114,13 @@ public class TheraphyServiceImpl implements TheraphyService {
 //    }
 
 
-    public Theraphy byPhysiotherapistId(Integer physiotherapistId) {
-        return theraphyRepository.findByPhysiotherapistId(physiotherapistId);
+    public Theraphy getTherapyByPhysiotherapistId(Integer physiotherapistId) {
+        return theraphyRepository.findTheraphyByPhysiotherapistId(physiotherapistId);
+    }
+
+
+    public List<Theraphy> getTherapiesByPhysiotherapistId(Integer physiotherapistId){
+        return theraphyRepository.findTheraphiesByPhysiotherapistId(physiotherapistId);
     }
 //    public Theraphy byPatientId(Integer patientId) {
 //        return theraphyRepository.findByPatientId(patientId);

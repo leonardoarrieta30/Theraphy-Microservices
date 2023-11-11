@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/theraphies", produces = "application/json")
 @Tag(name = "Theraphies", description = "Create, read, update and delete theraphies")
@@ -59,11 +61,20 @@ public class TheraphiesController {
 //        return ResponseEntity.ok(theraphy);
 //    }
 
-    @GetMapping("/byPhysiotherapist/{physiotherapistId}")
-    public ResponseEntity<Theraphy> getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer PhysiotherapistId){
-        Theraphy theraphy = theraphyService.byPhysiotherapistId(PhysiotherapistId);
-        return ResponseEntity.ok(theraphy);
+    //query did not return a unique result: 2
+//    @GetMapping("/getTherapyByPhysiotherapist/{physiotherapistId}")
+//    public TheraphyResource getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer PhysiotherapistId){
+//        Theraphy therapy = theraphyService.getTherapyByPhysiotherapistId(PhysiotherapistId);
+//        return mapper.toResource(therapy);
+//    }
+    @GetMapping("/getTherapiesByPhysiotherapist/{physiotherapistId}")
+    public List<Theraphy> getTherapiesByPhysiotherapistId(@PathVariable("physiotherapistId") Integer PhysiotherapistId){
+        List<Theraphy> listTherapy = theraphyService.getTherapiesByPhysiotherapistId(PhysiotherapistId);
+        return listTherapy;
     }
+
+
+
 
 //    @GetMapping("/byPatient/{patientId}")
 //    public ResponseEntity<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){

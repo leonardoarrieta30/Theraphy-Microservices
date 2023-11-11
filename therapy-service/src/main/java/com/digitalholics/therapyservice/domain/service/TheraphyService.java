@@ -3,6 +3,7 @@ package com.digitalholics.therapyservice.domain.service;
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
+import com.digitalholics.therapyservice.resource.TheraphyResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ public interface TheraphyService {
     Page<Theraphy> getAll(Pageable pageable);
 
     //Theraphy byAppointmentId(Integer appointmentId);
-    Theraphy byPhysiotherapistId(Integer physiotherapistId);
+    Theraphy getTherapyByPhysiotherapistId(Integer physiotherapistId);
+    List<Theraphy> getTherapiesByPhysiotherapistId(Integer physiotherapistId);
     //Theraphy byPatientId(Integer patientId);
 
 

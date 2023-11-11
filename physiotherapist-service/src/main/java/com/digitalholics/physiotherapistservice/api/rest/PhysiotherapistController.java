@@ -71,12 +71,13 @@ public class PhysiotherapistController {
         return ResponseEntity.ok(therapy);
     }
 
-
-    @GetMapping("/getTherapy/{physiotherapistId}")
-    public ResponseEntity<Therapy> getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer physiotherapistId){
-        Therapy therapy = physiotherapistService.getTherapyByPhysiotherapistId(physiotherapistId);
-        return ResponseEntity.ok(therapy);
-    }
+    //se unio con :
+//query did not return a unique result: 2
+//    @GetMapping("/getTherapy/{physiotherapistId}")
+//    public ResponseEntity<Therapy> getTherapyByPhysiotherapistId(@PathVariable("physiotherapistId") Integer physiotherapistId){
+//        Therapy therapy = physiotherapistService.getTherapyByPhysiotherapistId(physiotherapistId);
+//        return ResponseEntity.ok(therapy);
+//    }
 
 
 }
