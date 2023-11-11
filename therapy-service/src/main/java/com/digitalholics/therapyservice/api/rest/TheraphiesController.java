@@ -77,12 +77,31 @@ public class TheraphiesController {
 
 
 
+    //lo puedo hacer asi o como esta arriba es igual
 
-    @GetMapping("/getTherapiesByPatientId/{patientId}")
-    public List<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){
+    /*
+    *
+    * @GetMapping("/getTherapiesByPatientId/{patientId}")
+    public ResponseEntity<List<Theraphy>> getTherapyByPatientId(@PathVariable("patientId") Integer patientId){
         List<Theraphy> listTherapy = theraphyService.getTherapiesByPatientId(patientId);
-        return listTherapy;
+        return ResponseEntity.ok(listTherapy);
     }
+    *
+    *
+    */
+    @GetMapping("/getTherapiesByPatientId/{patientId}")
+    public ResponseEntity<List<Theraphy>> getTherapyByPatientId(@PathVariable("patientId") Integer patientId) {
+        List<Theraphy> listTherapy = theraphyService.getTherapiesByPatientId(patientId);
+
+        if (listTherapy.isEmpty()) {
+            // Si el array está vacío, devuelve un mensaje indicando que no se encontraron terapias
+            return ResponseEntity.notFound().build();
+        } else {
+            // Si se encontraron terapias, devuelve el array de terapias
+            return ResponseEntity.ok(listTherapy);
+        }
+    }
+
 
 
     //tengo lo mismo en appointment controller de appointment service
