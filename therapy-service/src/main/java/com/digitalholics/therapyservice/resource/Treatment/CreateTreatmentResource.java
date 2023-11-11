@@ -9,25 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 public class CreateTreatmentResource {
 
-    private Integer id;
-
-    private Integer theraphyId;
-
     private String videoUrl;
-
-
     private String duration;
-
-
     private String title;
-
-
     private String description;
-
-
     private String day;
-
-
     private Boolean viewed;
-
+    private Integer therapyId;
 }

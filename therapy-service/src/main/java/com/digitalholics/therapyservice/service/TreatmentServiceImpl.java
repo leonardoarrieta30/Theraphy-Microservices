@@ -68,11 +68,18 @@ public class TreatmentServiceImpl implements TreatmentService {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String username = authentication.getName();
 
-        Optional<Theraphy> theraphyOptional = theraphyRepository.findById(treatmentResource.getTheraphyId());
+        Optional<Theraphy> theraphyOptional = theraphyRepository.findById(treatmentResource.getTherapyId());
 
-        Theraphy theraphy = theraphyOptional.orElseThrow(() -> new NotFoundException("Theraphy not found with ID: " + treatmentResource.getTheraphyId()));
+        Theraphy theraphy = theraphyOptional.orElseThrow(() -> new NotFoundException("Theraphy not found with ID: " + treatmentResource.getTherapyId()));
 
         Treatment treatment = new Treatment();
+        treatment.setDay(treatmentResource.getDay());
+        treatment.setDuration(treatmentResource.getDuration());
+        treatment.setTitle(treatmentResource.getTitle());
+        treatment.setViewed(treatmentResource.getViewed());
+        treatment.setDescription(treatmentResource.getDescription());
+        treatment.setVideoUrl(treatmentResource.getVideoUrl());
+        treatment.setTheraphy(theraphy);
         return treatmentRepository.save(treatment);
     }
 

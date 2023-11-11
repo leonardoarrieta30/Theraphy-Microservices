@@ -1,5 +1,7 @@
 package com.digitalholics.therapyservice.resource.Treatment;
 
+import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
+import com.digitalholics.therapyservice.resource.TheraphyResource;
 import lombok.*;
 
 @Getter
@@ -10,11 +12,11 @@ import lombok.*;
 public class TreatmentResource {
 
     private Integer id;
-    private Integer theraphyId;
     private String videoUrl;
     private String duration;
     private String title;
     private String description;
     private String day;
     private Boolean viewed;
+    private TheraphyResource theraphy;
 }
