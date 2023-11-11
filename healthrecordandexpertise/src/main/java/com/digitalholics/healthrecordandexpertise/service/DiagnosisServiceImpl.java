@@ -54,4 +54,11 @@ public class DiagnosisServiceImpl implements DiagnosisService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,diagnosisId));
     }
+
+    @Override
+    public List<Diagnosis> getDiagnosisByPatientId(Integer patientId) {
+        return diagnosisRepository.findDiagnosisByPatientId(patientId);
+    }
+
+
 }

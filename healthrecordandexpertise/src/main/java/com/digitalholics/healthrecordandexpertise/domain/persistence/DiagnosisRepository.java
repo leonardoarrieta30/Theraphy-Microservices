@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
 
-
+    List<Diagnosis> findDiagnosisByPatientId(Integer patientId);
 
 
 }

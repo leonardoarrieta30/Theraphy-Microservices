@@ -26,6 +26,10 @@ public class MedicalHistory {
     @JsonIgnore
     private Patient patient; */
 
+    @Column(name = "patient_id")
+    private Integer patientId;
+
+
     @NotNull
     @NotBlank
     @Size(max = 10)

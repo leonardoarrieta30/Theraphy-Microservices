@@ -15,7 +15,8 @@ import lombok.*;
 public class DiagnosisResource {
 
     private Integer id;
-
+    private Integer physiotherapistId;
+    private Integer patientId;
     private String diagnosis;
     private String date;
 }

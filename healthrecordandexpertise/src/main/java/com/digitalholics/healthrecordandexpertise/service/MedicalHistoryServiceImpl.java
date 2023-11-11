@@ -1,6 +1,7 @@
 package com.digitalholics.healthrecordandexpertise.service;
 
 import com.digitalholics.healthrecordandexpertise.domain.model.entity.MedicalHistory;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.dto.Patient;
 import com.digitalholics.healthrecordandexpertise.domain.persistence.MedicalHistoryRepository;
 import com.digitalholics.healthrecordandexpertise.domain.service.MedicalHistoryService;
 import com.digitalholics.healthrecordandexpertise.mapping.Exception.ResourceNotFoundException;
@@ -9,16 +10,16 @@ import com.digitalholics.healthrecordandexpertise.resource.MedicalHistory.Create
 import com.digitalholics.healthrecordandexpertise.resource.MedicalHistory.UpdateMedicalHistoryResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -29,11 +30,13 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
     private final MedicalHistoryRepository medicalHistoryRepository;
 
     private final Validator validator;
+    private final RestTemplate restTemplate;
 
-
-    public MedicalHistoryServiceImpl(MedicalHistoryRepository medicalHistoryRepository, Validator validator) {
+    @Autowired
+    public MedicalHistoryServiceImpl(MedicalHistoryRepository medicalHistoryRepository, Validator validator, RestTemplate restTemplate) {
         this.medicalHistoryRepository = medicalHistoryRepository;
         this.validator = validator;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
                 .orElseThrow(()-> new ResourceNotFoundException(ENTITY, medicalHistoryId));
     }
 
-
+    //create medical history
     @Override
     public MedicalHistory create(CreateMedicalHistoryResource medicalHistoryResource) {
         Set<ConstraintViolation<CreateMedicalHistoryResource>> violations = validator.validate(medicalHistoryResource);
@@ -70,8 +73,11 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
         medicalHistory.setHereditaryHistory(medicalHistoryResource.getHereditaryHistory());
         medicalHistory.setNonPathologicalHistory(medicalHistoryResource.getNonPathologicalHistory());
         medicalHistory.setPathologicalHistory(medicalHistoryResource.getPathologicalHistory());
-
-
+        if(this.getPatientById(medicalHistoryResource.getPatientId()) == null){
+            throw new ResourceNotFoundException("Patient Not found");
+        }else{
+            medicalHistory.setPatientId(medicalHistoryResource.getPatientId());
+        }
         return medicalHistoryRepository.save(medicalHistory);
     }
 
@@ -115,5 +121,19 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,medicalHistoryId));
     }
+
+
+    @Override
+    public Patient getPatientById(Integer patientId){
+        Patient patient  = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId, Patient.class);
+        return patient;
+    }
+
+
+
+
+
+
+
 
 }

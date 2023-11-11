@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "patient-service", url = "http://localhost:7010")
 public interface PatientFeignClient {
-    @PostMapping("/api/v1/theraphies/create-theraphy")
+    @PostMapping("/api/v1/diagnosisByPatientId/create-theraphy")
     Therapy save(@RequestBody Therapy therapy);
 }

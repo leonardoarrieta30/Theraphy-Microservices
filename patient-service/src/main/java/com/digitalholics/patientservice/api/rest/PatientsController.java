@@ -1,6 +1,7 @@
 package com.digitalholics.patientservice.api.rest;
 
 import com.digitalholics.patientservice.domain.model.entity.dto.Appointment;
+import com.digitalholics.patientservice.domain.model.entity.dto.Diagnosis;
 import com.digitalholics.patientservice.domain.model.entity.dto.ResponseDTO;
 import com.digitalholics.patientservice.domain.model.entity.dto.Therapy;
 import com.digitalholics.patientservice.domain.service.PatientService;
@@ -16,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/patients", produces = "application/json")
@@ -87,7 +90,7 @@ public class PatientsController {
     }
 
 
-
+//normalmente el physi crea la terapia, pero nose porque cree esto xD
     @PostMapping("/saveTherapy/{patientId}")
     public ResponseEntity<Therapy> saveTherapy(@PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
         if(patientService.getById(patientId) == null){
@@ -95,6 +98,16 @@ public class PatientsController {
         }
         Therapy newTherapy = patientService.saveTherapy(patientId, therapy);
         return ResponseEntity.ok(therapy);
+    }
+
+    @GetMapping("/getDiagnosisByPatientId/{patientId}")
+    public ResponseEntity<List<Diagnosis>> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId){
+        if(patientService.getById(patientId) == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<Diagnosis> diagnosisList = patientService.getDiagnosisByPatientId(patientId);
+        return ResponseEntity.ok(diagnosisList);
+
     }
 
 }

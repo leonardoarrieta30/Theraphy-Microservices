@@ -70,8 +70,8 @@ public class Patient {
     @Column(name = "location")
     private String location;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "medical_history_id", referencedColumnName = "id")
-    private MedicalHistory medicalHistory;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "medical_history_id", referencedColumnName = "id")
+//    private MedicalHistory medicalHistory;
 
 }

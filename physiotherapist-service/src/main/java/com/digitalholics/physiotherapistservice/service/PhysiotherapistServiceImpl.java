@@ -117,6 +117,7 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));    }
 
 
+    @Override
     public Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId,Integer patientId, Therapy therapy){
         therapy.setPhysiotherapistId(physiotherapistId);
         therapy.setPatientId(patientId);
@@ -124,17 +125,19 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         return newTherapy;
     }
 
-
+    @Override
     public Therapy getTherapyByPhysiotherapistId(Integer physiotherapistId){
         Physiotherapist physiotherapist = physiotherapistRepository.findById(physiotherapistId).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));
 
         return therapyFeignClient.getTherapy(physiotherapistId);
     }
 
+    @Override
     public Patient getPatientById(Integer patientId){
         Patient patient  = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId, Patient.class);
         return patient;
     }
+
 
 
 

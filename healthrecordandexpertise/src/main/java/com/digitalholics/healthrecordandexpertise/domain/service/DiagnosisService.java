@@ -12,4 +12,7 @@ public interface DiagnosisService {
 
     Diagnosis create(Diagnosis diagnosis);
     ResponseEntity<?> delete(Integer patientId);
+
+    List<Diagnosis> getDiagnosisByPatientId(Integer patientId);
+
 }

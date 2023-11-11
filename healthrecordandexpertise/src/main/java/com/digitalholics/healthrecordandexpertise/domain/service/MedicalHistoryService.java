@@ -2,6 +2,7 @@ package com.digitalholics.healthrecordandexpertise.domain.service;
 
 
 import com.digitalholics.healthrecordandexpertise.domain.model.entity.MedicalHistory;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.dto.Patient;
 import com.digitalholics.healthrecordandexpertise.resource.MedicalHistory.CreateMedicalHistoryResource;
 import com.digitalholics.healthrecordandexpertise.resource.MedicalHistory.UpdateMedicalHistoryResource;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,5 @@ public interface MedicalHistoryService {
     MedicalHistory create(CreateMedicalHistoryResource medicalHistory);
     MedicalHistory update(Integer medicalHistoryId, UpdateMedicalHistoryResource request);
     ResponseEntity<?> delete(Integer medicalHistoryId);
+    Patient getPatientById(Integer patientId);
 }

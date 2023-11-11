@@ -1,6 +1,7 @@
 package com.digitalholics.patientservice.domain.service;
 
 import com.digitalholics.patientservice.domain.model.entity.Patient;
+import com.digitalholics.patientservice.domain.model.entity.dto.Diagnosis;
 import com.digitalholics.patientservice.domain.model.entity.dto.Therapy;
 import com.digitalholics.patientservice.resource.CreatePatientResource;
 import org.springframework.data.domain.Page;
@@ -24,4 +25,6 @@ public interface PatientService {
     Patient update(Integer patientId, Patient request);
 
     Therapy saveTherapy(Integer patientId, Therapy therapy);
+
+    List<Diagnosis> getDiagnosisByPatientId(Integer patientId);
 }

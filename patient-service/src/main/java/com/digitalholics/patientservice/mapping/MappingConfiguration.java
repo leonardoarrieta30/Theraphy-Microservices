@@ -11,8 +11,4 @@ public class MappingConfiguration {
         return new PatientMapper();
     }
 
-    @Bean
-    public MedicalHistoryMapper medicalHistoryMapper() {
-        return new MedicalHistoryMapper();
-    }
 }

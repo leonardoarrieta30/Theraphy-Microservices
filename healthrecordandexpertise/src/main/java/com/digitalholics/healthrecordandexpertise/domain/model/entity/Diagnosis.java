@@ -25,6 +25,12 @@ public class Diagnosis {
   
     private String diagnosis;
 
+    @Column(name = "physiotherapist_id")
+    private Integer physiotherapistId;
+
+    @Column(name = "patient_id")
+    private Integer patientId;
+
     @NotNull
     @NotBlank
     private String date;

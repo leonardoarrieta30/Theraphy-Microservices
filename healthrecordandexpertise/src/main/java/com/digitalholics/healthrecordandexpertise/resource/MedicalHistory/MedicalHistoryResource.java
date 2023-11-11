@@ -15,7 +15,6 @@ import lombok.*;
 public class MedicalHistoryResource {
 
     private Integer id;
-
     private String gender;
     private Double size;
     private Double weight;
@@ -23,4 +22,5 @@ public class MedicalHistoryResource {
     private String hereditaryHistory;
     private String nonPathologicalHistory;
     private String pathologicalHistory;
+    private Integer patientId;
 }
