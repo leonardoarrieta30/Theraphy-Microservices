@@ -1,6 +1,7 @@
 package com.digitalholics.physiotherapistservice.domain.service;
 
 import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
+import com.digitalholics.physiotherapistservice.domain.model.dto.Patient;
 import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
 import com.digitalholics.physiotherapistservice.resources.CreatePhysiotherapistResource;
 import com.digitalholics.physiotherapistservice.resources.UpdatePhysiotherapistResource;
@@ -19,4 +20,5 @@ public interface PhysiotherapistService {
     ResponseEntity<?> delete(Integer physiotherapistId);
     Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId, Integer patientId, Therapy therapy);
     Therapy getTherapyByPhysiotherapistId(Integer physiotherapistId);
+    Patient getPatientById(Integer patientId);
 }

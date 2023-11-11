@@ -1,5 +1,6 @@
 package com.digitalholics.physiotherapistservice.service;
 
+import com.digitalholics.physiotherapistservice.domain.model.dto.Patient;
 import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
 import com.digitalholics.physiotherapistservice.domain.persistence.PhysiotherapistRepository;
 import com.digitalholics.physiotherapistservice.domain.service.PhysiotherapistService;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.webjars.NotFoundException;
 import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
 
@@ -34,11 +36,14 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     private final TherapyFeignClient therapyFeignClient;
 
+    private final RestTemplate restTemplate;
+
     @Autowired
-    public PhysiotherapistServiceImpl(PhysiotherapistRepository physiotherapistRepository, Validator validator, TherapyFeignClient therapyFeignClient) {
+    public PhysiotherapistServiceImpl(PhysiotherapistRepository physiotherapistRepository, Validator validator, TherapyFeignClient therapyFeignClient, RestTemplate restTemplate) {
         this.physiotherapistRepository = physiotherapistRepository;
         this.validator = validator;
         this.therapyFeignClient = therapyFeignClient;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -125,6 +130,13 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
         return therapyFeignClient.getTherapy(physiotherapistId);
     }
+
+    public Patient getPatientById(Integer patientId){
+        Patient patient  = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId, Patient.class);
+        return patient;
+    }
+
+
 
 
 

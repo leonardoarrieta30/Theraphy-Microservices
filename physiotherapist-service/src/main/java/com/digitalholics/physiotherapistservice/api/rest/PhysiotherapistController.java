@@ -64,6 +64,9 @@ public class PhysiotherapistController {
         if(physiotherapistService.getById(physiotherapistId) == null){
             return ResponseEntity.notFound().build();
         }
+        if(physiotherapistService.getPatientById(patientId)==null){
+            return ResponseEntity.notFound().build();
+        }
         Therapy newTherapy = physiotherapistService.saveTherapyToPatientAndPhysiotherapist(physiotherapistId, patientId,therapy);
         return ResponseEntity.ok(therapy);
     }
