@@ -24,17 +24,6 @@ public class TreatmentsController {
         this.treatmentService = treatmentService;
         this.mapper = mapper;
     }
-
-    @PostMapping("create-treatment")
-    public ResponseEntity<TreatmentResource> createTreatment(@RequestBody CreateTreatmentResource resource) {
-        return new ResponseEntity<>(mapper.toResource(treatmentService.create(resource)), HttpStatus.CREATED);
-    }
-
-    @PutMapping("{treatmentId}")
-    public TreatmentResource updateTreatment(@PathVariable Integer treatmentId,
-                                             @RequestBody UpdateTreatmentResource resource) {
-        return mapper.toResource(treatmentService.update(treatmentId, mapper.toModel(resource)));
-    }
     
     @GetMapping("allTreatment")
     public Page<TreatmentResource> getAllTreatments(Pageable pageable) {
@@ -56,6 +45,15 @@ public class TreatmentsController {
         return treatmentService.delete(treatmentId);
     }
 
+    @PostMapping("create-treatment")
+    public ResponseEntity<TreatmentResource> createTreatment(@RequestBody CreateTreatmentResource resource) {
+        return new ResponseEntity<>(mapper.toResource(treatmentService.create(resource)), HttpStatus.CREATED);
+    }
 
-
+    @PutMapping("{treatmentId}")
+    public TreatmentResource updateTreatment(@PathVariable Integer treatmentId,
+                                             @RequestBody UpdateTreatmentResource resource) {
+        return mapper.toResource(treatmentService.update(treatmentId, mapper.toModel(resource)));
+    }
+    
 }
