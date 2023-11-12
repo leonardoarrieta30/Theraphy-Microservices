@@ -16,14 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 public class Theraphy2 {
-
-    private Integer id;
     private String theraphyName;
     private String appointmentQuantity;
     private String appointmentGap;
     private String startAt;
     private String finishAt;
-    //private Integer appointmentId;
     private Integer patientId;
     private Integer physiotherapistId;
 

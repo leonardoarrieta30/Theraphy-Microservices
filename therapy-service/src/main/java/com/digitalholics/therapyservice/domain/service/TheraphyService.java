@@ -3,6 +3,8 @@ package com.digitalholics.therapyservice.domain.service;
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
 import com.digitalholics.therapyservice.domain.model.entity.dto.Appointment;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Patient;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
 import com.digitalholics.therapyservice.resource.TheraphyResource;
 import org.springframework.data.domain.Page;
@@ -37,5 +39,8 @@ public interface TheraphyService {
     Theraphy getById(Integer theraphyId);
 
     Theraphy update(Integer theraphyId, Theraphy request);
+
+    Patient getPatientById(Integer patientId);
+    Physiotherapist getPhysiotherapistById(Integer physiotherapistId);
 
 }

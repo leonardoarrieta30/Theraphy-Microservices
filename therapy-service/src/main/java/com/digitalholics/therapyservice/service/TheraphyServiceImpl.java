@@ -3,6 +3,8 @@ package com.digitalholics.therapyservice.service;
 
 import com.digitalholics.therapyservice.domain.model.entity.Theraphy;
 import com.digitalholics.therapyservice.domain.model.entity.dto.Appointment;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Patient;
+import com.digitalholics.therapyservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.therapyservice.domain.persistence.TheraphyRepository;
 import com.digitalholics.therapyservice.domain.service.TheraphyService;
 import com.digitalholics.therapyservice.mapping.Exception.ResourceNotFoundException;
@@ -80,9 +82,17 @@ public class TheraphyServiceImpl implements TheraphyService {
         theraphy.setAppointmentGap(theraphyResource.getAppointmentGap());
         theraphy.setStartAt(theraphyResource.getStartAt());
         theraphy.setFinishAt(theraphyResource.getFinishAt());
-        theraphy.setPhysiotherapistId(theraphyResource.getPhysiotherapistId());
-        theraphy.setPatientId(theraphyResource.getPatientId());
 
+        if(this.getPatientById(theraphyResource.getPatientId()) == null){
+            throw new ResourceNotFoundException("Patient not found");
+        }else{
+            theraphy.setPatientId(theraphyResource.getPatientId());
+        }
+        if(this.getPhysiotherapistById(theraphyResource.getPhysiotherapistId()) == null) {
+            throw new ResourceNotFoundException("Physiotherapist not found");
+        }else{
+            theraphy.setPhysiotherapistId(theraphyResource.getPhysiotherapistId());
+        }
 
        return theraphyRepository.save(theraphy);
     }
@@ -140,6 +150,17 @@ public class TheraphyServiceImpl implements TheraphyService {
 //    }
 //
 
+    @Override
+    public Patient getPatientById(Integer patientId){
+        Patient patient  = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId, Patient.class);
+        return patient;
+    }
+
+    @Override
+    public Physiotherapist getPhysiotherapistById(Integer physiotherapistId){
+        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
+        return physiotherapist;
+    }
 
 
 }
