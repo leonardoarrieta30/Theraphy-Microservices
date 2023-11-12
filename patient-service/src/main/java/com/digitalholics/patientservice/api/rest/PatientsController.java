@@ -91,14 +91,14 @@ public class PatientsController {
 
 
 //normalmente el physi crea la terapia, pero nose porque cree esto xD
-    @PostMapping("/saveTherapy/{patientId}")
-    public ResponseEntity<Therapy> saveTherapy(@PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
-        if(patientService.getById(patientId) == null){
-            return ResponseEntity.notFound().build();
-        }
-        Therapy newTherapy = patientService.saveTherapy(patientId, therapy);
-        return ResponseEntity.ok(therapy);
-    }
+//    @PostMapping("/saveTherapy/{patientId}")
+//    public ResponseEntity<Therapy> saveTherapy(@PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
+//        if(patientService.getById(patientId) == null){
+//            return ResponseEntity.notFound().build();
+//        }
+//        Therapy newTherapy = patientService.saveTherapy(patientId, therapy);
+//        return ResponseEntity.ok(therapy);
+//    }
 
     @GetMapping("/getDiagnosisByPatientId/{patientId}")
     public ResponseEntity<List<Diagnosis>> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId){
