@@ -1,11 +1,11 @@
-package com.digitalholics.physiotherapistservice.mapping;
+package com.digitalholics.healthrecordandexpertise.mapping;
 
 
-import com.digitalholics.physiotherapistservice.domain.model.Job;
-import com.digitalholics.physiotherapistservice.mapping.configuration.EnhancedModelMapper;
-import com.digitalholics.physiotherapistservice.resources.CreateJobResource;
-import com.digitalholics.physiotherapistservice.resources.JobResource;
-import com.digitalholics.physiotherapistservice.resources.UpdateJobResource;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.Job;
+import com.digitalholics.healthrecordandexpertise.mapping.configuration.EnhancedModelMapper;
+import com.digitalholics.healthrecordandexpertise.resource.CreateJobResource;
+import com.digitalholics.healthrecordandexpertise.resource.JobResource;
+import com.digitalholics.healthrecordandexpertise.resource.UpdateJobResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

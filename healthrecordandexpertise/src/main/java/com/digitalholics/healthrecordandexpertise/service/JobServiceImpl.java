@@ -1,16 +1,20 @@
-package com.digitalholics.physiotherapistservice.service;
+package com.digitalholics.healthrecordandexpertise.service;
 
-import com.digitalholics.physiotherapistservice.domain.model.Job;
-import com.digitalholics.physiotherapistservice.domain.persistence.JobRepository;
-import com.digitalholics.physiotherapistservice.domain.service.JobService;
-import com.digitalholics.physiotherapistservice.mapping.exception.ResourceNotFoundException;
-import com.digitalholics.physiotherapistservice.mapping.exception.ResourceValidationException;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.Job;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.dto.Physiotherapist;
+import com.digitalholics.healthrecordandexpertise.domain.persistence.JobRepository;
+import com.digitalholics.healthrecordandexpertise.domain.service.JobService;
+import com.digitalholics.healthrecordandexpertise.mapping.Exception.ResourceNotFoundException;
+import com.digitalholics.healthrecordandexpertise.mapping.Exception.ResourceValidationException;
+import com.digitalholics.healthrecordandexpertise.resource.CreateJobResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Set;
@@ -23,9 +27,13 @@ public class JobServiceImpl implements JobService {
 
     private final Validator validator;
 
-    public JobServiceImpl(JobRepository jobRepository, Validator validator) {
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public JobServiceImpl(JobRepository jobRepository, Validator validator, RestTemplate restTemplate) {
         this.jobRepository = jobRepository;
         this.validator = validator;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -45,12 +53,21 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public Job create(Job job) {
-        Set<ConstraintViolation<Job>> violations = validator.validate(job);
+    public Job create(CreateJobResource jobResource) {
+        Set<ConstraintViolation<CreateJobResource>> violations = validator.validate(jobResource);
 
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
+
+        Job job = new Job();
+        job.setPosition(jobResource.getPosition());
+        job.setOrganization(jobResource.getOrganization());
+        if(this.getPhysiotherapistById(jobResource.getPhysiotherapistId()) == null){
+            throw new ResourceNotFoundException("Physiotherapist not found");
+        }else{
+            job.setPhysiotherapistId(jobResource.getPhysiotherapistId());
+        }
         return jobRepository.save(job);
     }
 
@@ -76,4 +93,11 @@ public class JobServiceImpl implements JobService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,jobId));
     }
+
+    @Override
+    public Physiotherapist getPhysiotherapistById(Integer physiotherapistId){
+        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
+        return physiotherapist;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.digitalholics.physiotherapistservice.domain.model;
+package com.digitalholics.healthrecordandexpertise.domain.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -23,7 +23,7 @@ public class Job {
     private String position;
 
     @Size(max = 50)
-    private String Organization;
+    private String organization;
 
 }
 

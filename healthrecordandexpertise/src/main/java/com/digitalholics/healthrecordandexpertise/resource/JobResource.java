@@ -1,4 +1,4 @@
-package com.digitalholics.physiotherapistservice.resources;
+package com.digitalholics.healthrecordandexpertise.resource;
 
 import lombok.*;
 
@@ -11,5 +11,5 @@ public class JobResource {
     private Integer id;
     private Integer physiotherapistId;
     private String position;
-    private String Organization;
+    private String organization;
 }

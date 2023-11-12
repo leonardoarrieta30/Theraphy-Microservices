@@ -1,11 +1,11 @@
-package com.digitalholics.physiotherapistservice.api.rest;
+package com.digitalholics.healthrecordandexpertise.api.rest;
 
 
-import com.digitalholics.physiotherapistservice.domain.service.JobService;
-import com.digitalholics.physiotherapistservice.mapping.JobMapper;
-import com.digitalholics.physiotherapistservice.resources.CreateJobResource;
-import com.digitalholics.physiotherapistservice.resources.JobResource;
-import com.digitalholics.physiotherapistservice.resources.UpdateJobResource;
+import com.digitalholics.healthrecordandexpertise.domain.service.JobService;
+import com.digitalholics.healthrecordandexpertise.mapping.JobMapper;
+import com.digitalholics.healthrecordandexpertise.resource.CreateJobResource;
+import com.digitalholics.healthrecordandexpertise.resource.JobResource;
+import com.digitalholics.healthrecordandexpertise.resource.UpdateJobResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,15 +32,15 @@ public class JobsController {
         return mapper.modelListPage(jobService.getAll(), pageable);
     }
 
-    @GetMapping("jobById/{jobId}")
+    @GetMapping("{jobId}")
     public JobResource getJobById(@PathVariable Integer jobId) {
         return mapper.toResource(jobService.getById(jobId));
     }
 
 
-    @PostMapping("registration-job")
+    @PostMapping()
     public ResponseEntity<JobResource> createJob(@RequestBody CreateJobResource resource) {
-        return new ResponseEntity<>(mapper.toResource(jobService.create(mapper.toModel(resource))), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.toResource(jobService.create(resource)), HttpStatus.CREATED);
     }
 
     @PutMapping("updatedJobById{jobId}")
@@ -49,7 +49,7 @@ public class JobsController {
         return mapper.toResource(jobService.update(jobId, mapper.toModel(resource)));
     }
 
-    @DeleteMapping("deleteJobById/{jobId}")
+    @DeleteMapping("{jobId}")
     public ResponseEntity<?> deleteJob(@PathVariable Integer jobId) {
         return jobService.delete(jobId);
     }

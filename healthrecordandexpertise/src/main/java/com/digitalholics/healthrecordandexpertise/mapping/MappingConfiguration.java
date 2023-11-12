@@ -13,4 +13,10 @@ public class MappingConfiguration {
 
     @Bean
     public MedicalHistoryMapper medicalHistoryMapper() { return new MedicalHistoryMapper();}
+
+    @Bean
+    public CertificationMapper certificationMapper() { return new CertificationMapper();}
+
+    @Bean
+    public JobMapper jobMapper() { return new JobMapper();}
 }

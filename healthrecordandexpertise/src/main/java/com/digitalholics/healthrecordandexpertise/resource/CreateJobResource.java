@@ -1,4 +1,4 @@
-package com.digitalholics.physiotherapistservice.resources;
+package com.digitalholics.healthrecordandexpertise.resource;
 
 import lombok.*;
 
@@ -8,8 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateJobResource {
-    private Integer id;
     private Integer physiotherapistId;
     private String position;
-    private String Organization;
+    private String organization;
 }
