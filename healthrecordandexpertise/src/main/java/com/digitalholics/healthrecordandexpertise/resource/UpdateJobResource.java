@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class UpdateJobResource {
     private Integer id;
-    private Integer physiotherapistId;
     private String position;
     private String organization;
 }

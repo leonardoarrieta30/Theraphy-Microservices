@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdatePhysiotherapistResource {
+    private Integer id;
     private String dni;
     private String specialization;
     private Integer age;

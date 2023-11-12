@@ -14,7 +14,6 @@ public class TheraphyResource {
     private String appointmentGap;
     private String startAt;
     private String finishAt;
-    //private Integer appointmentId;
     private Integer patientId;
     private Integer physiotherapistId;
 //    private PatientResource patient;

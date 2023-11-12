@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class CreatePhysiotherapistResource
 {
-    private Integer id;
     private String dni;
     private String specialization;
     private Integer age;

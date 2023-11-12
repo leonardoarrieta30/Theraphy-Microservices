@@ -7,6 +7,7 @@ import com.digitalholics.therapyservice.domain.model.entity.dto.Patient;
 import com.digitalholics.therapyservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
 import com.digitalholics.therapyservice.resource.TheraphyResource;
+import com.digitalholics.therapyservice.resource.UpdateTheraphyResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public interface TheraphyService {
    // List<Theraphy> getTherapyByPatientId(@PathVariable("patientId") Integer patientId);
     Theraphy getById(Integer theraphyId);
 
-    Theraphy update(Integer theraphyId, Theraphy request);
+    Theraphy update(Integer Theraphy, UpdateTheraphyResource theraphyResource);
 
     Patient getPatientById(Integer patientId);
     Physiotherapist getPhysiotherapistById(Integer physiotherapistId);

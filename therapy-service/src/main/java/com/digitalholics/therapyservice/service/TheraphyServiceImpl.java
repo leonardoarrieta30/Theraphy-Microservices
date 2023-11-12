@@ -11,6 +11,7 @@ import com.digitalholics.therapyservice.mapping.Exception.ResourceNotFoundExcept
 import com.digitalholics.therapyservice.mapping.Exception.ResourceValidationException;
 import com.digitalholics.therapyservice.resource.CreateTheraphyResource;
 import com.digitalholics.therapyservice.resource.TheraphyResource;
+import com.digitalholics.therapyservice.resource.UpdateTheraphyResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,20 +99,19 @@ public class TheraphyServiceImpl implements TheraphyService {
     }
 
     @Override
-    public Theraphy update(Integer theraphyId, Theraphy request) {
-        Set<ConstraintViolation<Theraphy>> violations = validator.validate(request);
+    public Theraphy update(Integer Theraphy, UpdateTheraphyResource theraphyResource) {
+        Theraphy theraphy = getById(Theraphy);
 
-        if (!violations.isEmpty())
-            throw new ResourceValidationException(ENTITY, violations);
+        theraphy.setTheraphyName(theraphyResource.getTheraphyName() != null ? theraphyResource.getTheraphyName() : theraphy.getTheraphyName());
+        theraphy.setStartAt(theraphyResource.getStartAt() != null ? theraphyResource.getStartAt() : theraphy.getStartAt());
+        theraphy.setAppointmentGap(theraphyResource.getAppointmentGap() != null ? theraphyResource.getAppointmentGap() : theraphy.getAppointmentGap());
+        theraphy.setFinishAt(theraphyResource.getFinishAt() != null ? theraphyResource.getFinishAt() : theraphy.getFinishAt());
+        theraphy.setAppointmentQuantity(theraphyResource.getAppointmentQuantity() != null ? theraphyResource.getAppointmentQuantity() : theraphy.getAppointmentQuantity());
+        //theraphy.setPatientId(this.getPatientById(theraphyResource.getPatientId()) != null ? theraphyResource.getPatientId() : theraphy.getPatientId());
+        //theraphy.setPhysiotherapistId(this.getPhysiotherapistById(theraphyResource.getPhysiotherapistId()) != null ? theraphyResource.getPhysiotherapistId() : theraphy.getPhysiotherapistId());
 
-        return theraphyRepository.findById(theraphyId).map(theraphy ->
-                theraphyRepository.save(
-                        theraphy.withTheraphyName(request.getTheraphyName())
-                                .withAppointmentGap(request.getAppointmentGap())
-                                .withStartAt(request.getStartAt())
-                                .withFinishAt(request.getFinishAt())
-                                .withAppointmentQuantity(request.getAppointmentQuantity())
-                )).orElseThrow(()-> new ResourceNotFoundException(ENTITY, theraphyId));
+        return theraphyRepository.save(theraphy);
+
 
 
     }

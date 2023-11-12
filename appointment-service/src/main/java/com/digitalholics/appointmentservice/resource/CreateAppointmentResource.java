@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateAppointmentResource {
-
     private Boolean done;
     private String topic;
     private String diagnosis;
@@ -18,5 +17,4 @@ public class CreateAppointmentResource {
     private String hour;
     private String place;
     private Integer therapyId;
-
 }

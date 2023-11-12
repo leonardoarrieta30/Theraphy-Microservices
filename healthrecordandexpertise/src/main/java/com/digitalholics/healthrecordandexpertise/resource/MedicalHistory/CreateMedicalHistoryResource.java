@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateMedicalHistoryResource {
-    private Integer id;
     private String gender;
     private Double size;
     private Double weight;
