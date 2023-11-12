@@ -37,3 +37,7 @@ spring:
           uri: lb://healthrecordandexpertise-service
           predicates:
             - Path=/healthrecordandexpertise/**
+        - id: social-service
+          uri: lb://social-service
+          predicates:
+            - Path=/social/**

@@ -45,7 +45,7 @@ public class PhysiotherapistController {
         return mapper.toResource(physiotherapistService.getById(physiotherapistId));
     }
 
-    @PatchMapping("{physiotherapistId}")
+    @PatchMapping("patch/{physiotherapistId}")
     public ResponseEntity<PhysiotherapistResource> patchPhysiotherapist(
             @PathVariable Integer physiotherapistId,
             @RequestBody UpdatePhysiotherapistResource request) {
