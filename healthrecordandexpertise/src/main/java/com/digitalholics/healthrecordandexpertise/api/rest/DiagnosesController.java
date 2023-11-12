@@ -3,12 +3,12 @@ package com.digitalholics.healthrecordandexpertise.api.rest;
 import com.digitalholics.healthrecordandexpertise.domain.model.entity.Diagnosis;
 import com.digitalholics.healthrecordandexpertise.domain.service.DiagnosisService;
 import com.digitalholics.healthrecordandexpertise.mapping.DiagnosisMapper;
+import com.digitalholics.healthrecordandexpertise.resource.CreateDiagnosisResource;
+import com.digitalholics.healthrecordandexpertise.resource.DiagnosisResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,11 +26,27 @@ public class DiagnosesController {
         this.mapper = mapper;
     }
 
+
+    @PostMapping
+    public DiagnosisResource createDiagnosis(@RequestBody CreateDiagnosisResource resource) {
+        return mapper.toResource(diagnosisService.create(resource));
+    }
+
+    @DeleteMapping("{diagnosisId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Integer diagnosisId) {
+        return diagnosisService.delete(diagnosisId);
+    }
+
     @GetMapping("/diagnosisByPatientId/{patientId}")
     public ResponseEntity<List<Diagnosis>> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId){
         List<Diagnosis> diagnosisList =  diagnosisService.getDiagnosisByPatientId(patientId);
         return ResponseEntity.ok(diagnosisList);
     }
+
+
+
+
+
 
 
 }
