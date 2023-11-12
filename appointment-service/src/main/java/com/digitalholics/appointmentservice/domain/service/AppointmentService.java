@@ -23,7 +23,7 @@ public interface AppointmentService {
 
     //Appointment getAppointmentByTheraphyId(Integer theraphyId);
 
-    Appointment create(CreateAppointmentResource appointment, Integer therapyId);
+    Appointment create(CreateAppointmentResource appointment);
 
     ResponseEntity<?> delete(Integer appointmentId);
     Theraphy2 getTherapyByAppointmentId(Integer appointmentId);
@@ -33,5 +33,6 @@ public interface AppointmentService {
 
     Theraphy2 getTherapyById(Integer patientId);
    // Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2);
+
 
 }

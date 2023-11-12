@@ -52,12 +52,9 @@ public class AppointmentsController {
 //        return mapper.toResource(appointmentService.getAppointmentByTheraphyId(theraphyId));
 //    }
 
-    @PostMapping("create_appointment/{therapyId}")
-    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource, @PathVariable("therapyId") Integer therapyId) {
-        if(appointmentService.getTherapyById(therapyId) == null){
-            return ResponseEntity.notFound().build();
-        }
-        return new ResponseEntity<>(mapper.toResource(appointmentService.create((resource),therapyId)), HttpStatus.CREATED);
+    @PostMapping()
+    public ResponseEntity<AppointmentResource> createAppointment(@RequestBody CreateAppointmentResource resource) {
+        return new ResponseEntity<>(mapper.toResource(appointmentService.create(resource)), HttpStatus.CREATED);
     }
 
     @PutMapping("{appointmentId}")

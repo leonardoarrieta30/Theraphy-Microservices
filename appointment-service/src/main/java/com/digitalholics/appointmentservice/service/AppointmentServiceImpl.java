@@ -83,7 +83,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment create(CreateAppointmentResource appointmentResource, Integer therapyId) {
+    public Appointment create(CreateAppointmentResource appointmentResource) {
         Set<ConstraintViolation<CreateAppointmentResource>> violations = validator.validate(appointmentResource);
 
         if(!violations.isEmpty())
@@ -103,7 +103,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setPlace(appointmentResource.getPlace());
         appointment.setDiagnosis(appointmentResource.getDiagnosis());
         appointment.setTopic(appointmentResource.getTopic());
-        appointment.setTherapyId(therapyId);
+
+        if(this.getTherapyById(appointmentResource.getTherapyId()) == null){
+            throw new ResourceNotFoundException("Therapy not found");
+        }else{
+            appointment.setTherapyId(appointmentResource.getTherapyId());
+        }
 
         return appointmentRepository.save(appointment);
 
@@ -138,6 +143,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         Theraphy2 therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy2.class);
         return therapy;
     }
+
+//    @Override
+//    public Theraphy2 getTherapyById(Integer therapyId){
+//        Theraphy2 theraphy2  = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy2.class);
+//        return theraphy2;
+//    }
 
 
 
