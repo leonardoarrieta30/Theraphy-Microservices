@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -131,11 +132,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     public Theraphy2 getTherapyByAppointmentId(Integer appointmentId) {
+        Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
+        if(appointment == null)
+            throw new ResourceNotFoundException("Appointment not found");
         Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
         return theraphy2;
     }
 
     public List<Appointment> getAppointmentsByTherapyId(Integer therapyId){
+        if(this.getTherapyById(therapyId)==null){
+            throw new ResourceNotFoundException("Therapy not found");
+        }
         return appointmentRepository.findAppointmentsByTherapyId(therapyId);
     }
 
@@ -143,6 +150,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         Theraphy2 therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy2.class);
         return therapy;
     }
+
+
+
 
 //    @Override
 //    public Theraphy2 getTherapyById(Integer therapyId){

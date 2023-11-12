@@ -68,15 +68,14 @@ public class AppointmentsController {
         return appointmentService.delete(appointmentId);
     }
 
-    @GetMapping("/therapy/{appointmentId}")
-    public ResponseEntity<Theraphy2> getTherapyByAppointmentId(@PathVariable("appointmentId") Integer appointmentId){
-        Appointment appointment = appointmentService.getById(appointmentId);
-        if(appointment == null)
-            return ResponseEntity.notFound().build();
+    //ya no sirve
+//    @GetMapping("/therapy/{appointmentId}")
+//    public ResponseEntity<Theraphy2> getTherapyByAppointmentId(@PathVariable("appointmentId") Integer appointmentId){
+//        Theraphy2 therapy = appointmentService.getTherapyByAppointmentId(appointmentId);
+//        return ResponseEntity.ok(therapy);
+//    }
 
-        Theraphy2 therapy = appointmentService.getTherapyByAppointmentId(appointmentId);
-        return ResponseEntity.ok(therapy);
-    }
+
 
 //
 //    @GetMapping("appointment/theraphy-patient/{patientId}")
@@ -155,6 +154,7 @@ public class AppointmentsController {
 //        return theraphy;
 //    }
 
+    //ya no sirve
     @GetMapping("/therapy/{physiotherapistId}/{therapyId}")
     public ResponseDTO getTherapyPhysiotherapistId(@PathVariable Integer physiotherapistId, @PathVariable Integer therapyId){
 
@@ -181,6 +181,8 @@ public class AppointmentsController {
     public List<Appointment> getAppointmentsByTherapyId(@PathVariable("therapyId") Integer therapyId){
         return appointmentService.getAppointmentsByTherapyId(therapyId);
     }
+
+
 
 
 
