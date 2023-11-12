@@ -22,5 +22,4 @@ public interface ReviewService {
     ResponseEntity<?> delete(Integer reviewId);
     Patient getPatientById(Integer patientId);
     Physiotherapist getPhysiotherapistById(Integer physiotherapistId);
-    Physiotherapist patchPhysiotherapist(Integer physiotherapistId, Physiotherapist physiotherapist);
 }

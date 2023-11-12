@@ -118,8 +118,7 @@ public class ReviewServiceImpl implements ReviewService {
         this.getPhysiotherapistById(review.getPhysiotherapistId()).setRating(ratingPhysiotherapist);
 
         //post
-        //physiotherapistFeignClient.save(review.getPhysiotherapistId(), this.getPhysiotherapistById(review.getPhysiotherapistId()));
-        this.patchPhysiotherapist(review.getPhysiotherapistId(), this.getPhysiotherapistById(review.getPhysiotherapistId()));
+        physiotherapistFeignClient.save(review.getPhysiotherapistId(), this.getPhysiotherapistById(review.getPhysiotherapistId()));
         //physiotherapistRepository.save(physiotherapist);
 
 
@@ -162,12 +161,6 @@ public class ReviewServiceImpl implements ReviewService {
         Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
         return physiotherapist;
     }
-    @Override
-    public Physiotherapist patchPhysiotherapist(Integer physiotherapistId, Physiotherapist physiotherapist){
-        return physiotherapistFeignClient.save(physiotherapistId, physiotherapist);
-    }
-
-
 
 
 }
