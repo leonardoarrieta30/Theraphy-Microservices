@@ -2,7 +2,6 @@ package com.digitalholics.appointmentservice.api.rest;
 
 
 import com.digitalholics.appointmentservice.domain.model.entity.Appointment;
-import com.digitalholics.appointmentservice.domain.model.entity.Theraphy;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.ResponseDTO;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.Theraphy2;
