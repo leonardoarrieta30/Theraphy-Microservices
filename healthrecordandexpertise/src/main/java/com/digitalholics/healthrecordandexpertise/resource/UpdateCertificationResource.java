@@ -1,13 +1,11 @@
-package com.digitalholics.physiotherapistservice.resources;
+package com.digitalholics.healthrecordandexpertise.resource;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@With
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateCertificationResource {
+public class UpdateCertificationResource {
     private Integer id;
     private Integer physiotherapistId;
     private String title;

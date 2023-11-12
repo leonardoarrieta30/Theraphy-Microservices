@@ -1,6 +1,6 @@
-package com.digitalholics.physiotherapistservice.domain.persistence;
+package com.digitalholics.healthrecordandexpertise.domain.persistence;
 
-import com.digitalholics.physiotherapistservice.domain.model.Certification;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.Certification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

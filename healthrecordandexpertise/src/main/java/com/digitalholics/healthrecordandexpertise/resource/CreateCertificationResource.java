@@ -1,4 +1,4 @@
-package com.digitalholics.physiotherapistservice.resources;
+package com.digitalholics.healthrecordandexpertise.resource;
 
 import lombok.*;
 
@@ -7,13 +7,10 @@ import lombok.*;
 @With
 @NoArgsConstructor
 @AllArgsConstructor
-public class CertificationResource {
-    private Integer id;
+public class CreateCertificationResource {
     private Integer physiotherapistId;
     private String title;
     private String school;
     private Integer year;
     private String photoUrl;
-   
-    
 }

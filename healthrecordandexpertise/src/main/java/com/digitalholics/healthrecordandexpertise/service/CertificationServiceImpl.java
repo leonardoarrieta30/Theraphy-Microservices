@@ -1,16 +1,20 @@
-package com.digitalholics.physiotherapistservice.service;
+package com.digitalholics.healthrecordandexpertise.service;
 
-import com.digitalholics.physiotherapistservice.domain.model.Certification;
-import com.digitalholics.physiotherapistservice.domain.persistence.CertificationRepository;
-import com.digitalholics.physiotherapistservice.domain.service.CertificationService;
-import com.digitalholics.physiotherapistservice.mapping.exception.ResourceNotFoundException;
-import com.digitalholics.physiotherapistservice.mapping.exception.ResourceValidationException;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.Certification;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.dto.Physiotherapist;
+import com.digitalholics.healthrecordandexpertise.domain.persistence.CertificationRepository;
+import com.digitalholics.healthrecordandexpertise.domain.service.CertificationService;
+import com.digitalholics.healthrecordandexpertise.mapping.Exception.ResourceNotFoundException;
+import com.digitalholics.healthrecordandexpertise.mapping.Exception.ResourceValidationException;
+import com.digitalholics.healthrecordandexpertise.resource.CreateCertificationResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Set;
@@ -23,10 +27,13 @@ public class CertificationServiceImpl implements CertificationService {
     private final CertificationRepository certificationRepository;
 
     private final Validator validator;
+    private final RestTemplate restTemplate;
 
-    public CertificationServiceImpl(CertificationRepository certificationRepositoryRepository, Validator validator) {
+    @Autowired
+    public CertificationServiceImpl(CertificationRepository certificationRepositoryRepository, Validator validator, RestTemplate restTemplate) {
         this.certificationRepository = certificationRepositoryRepository;
         this.validator = validator;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -46,11 +53,23 @@ public class CertificationServiceImpl implements CertificationService {
     }
 
     @Override
-    public Certification create(Certification certification) {
-        Set<ConstraintViolation<Certification>> violations = validator.validate(certification);
+    public Certification create(CreateCertificationResource certificationResource) {
+        Set<ConstraintViolation<CreateCertificationResource>> violations = validator.validate(certificationResource);
 
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
+
+        Certification certification = new Certification();
+        certification.setYear(certificationResource.getYear());
+        certification.setPhotoUrl(certificationResource.getPhotoUrl());
+        certification.setTitle(certificationResource.getTitle());
+        certification.setSchool(certificationResource.getSchool());
+        if(this.getPhysiotherapistById(certificationResource.getPhysiotherapistId()) == null){
+            throw new ResourceNotFoundException("Physiotherapist not found");
+        }else{
+            certification.setPhysiotherapistId(certificationResource.getPhysiotherapistId());
+        }
+
 
         return certificationRepository.save(certification);
     }
@@ -79,4 +98,11 @@ public class CertificationServiceImpl implements CertificationService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,certificationId));
     }
+
+    @Override
+    public Physiotherapist getPhysiotherapistById(Integer physiotherapistId){
+        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
+        return physiotherapist;
+    }
+
 }

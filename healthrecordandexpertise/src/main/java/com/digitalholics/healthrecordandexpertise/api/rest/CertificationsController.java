@@ -1,10 +1,11 @@
-package com.digitalholics.physiotherapistservice.api.rest;
+package com.digitalholics.healthrecordandexpertise.api.rest;
 
-import com.digitalholics.physiotherapistservice.domain.service.CertificationService;
-import com.digitalholics.physiotherapistservice.mapping.CertificationMapper;
-import com.digitalholics.physiotherapistservice.resources.CertificationResource;
-import com.digitalholics.physiotherapistservice.resources.CreateCertificationResource;
-import com.digitalholics.physiotherapistservice.resources.UpdateCertificationResource;
+
+import com.digitalholics.healthrecordandexpertise.domain.service.CertificationService;
+import com.digitalholics.healthrecordandexpertise.mapping.CertificationMapper;
+import com.digitalholics.healthrecordandexpertise.resource.CertificationResource;
+import com.digitalholics.healthrecordandexpertise.resource.CreateCertificationResource;
+import com.digitalholics.healthrecordandexpertise.resource.UpdateCertificationResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,15 +32,15 @@ public class CertificationsController {
         return mapper.modelListPage(certificationService.getAll(), pageable);
     }
 
-    @GetMapping("certificationById/{certificationId}")
+    @GetMapping("{certificationId}")
     public CertificationResource getCertificationById(@PathVariable Integer certificationId) {
         return mapper.toResource(certificationService.getById(certificationId));
     }
 
 
-    @PostMapping("registration-certification")
+    @PostMapping()
     public ResponseEntity<CertificationResource> createCertification(@RequestBody CreateCertificationResource resource) {
-        return new ResponseEntity<>(mapper.toResource(certificationService.create(mapper.toModel(resource))), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.toResource(certificationService.create(resource)), HttpStatus.CREATED);
     }
 
     @PutMapping("updateCertificationById{certificationId}")
@@ -48,7 +49,7 @@ public class CertificationsController {
         return mapper.toResource(certificationService.update(certificationId, mapper.toModel(resource)));
     }
 
-    @DeleteMapping("deleteCertificationById/{certificationId}")
+    @DeleteMapping("{certificationId}")
     public ResponseEntity<?> deleteCertification(@PathVariable Integer certificationId) {
         return certificationService.delete(certificationId);
     }

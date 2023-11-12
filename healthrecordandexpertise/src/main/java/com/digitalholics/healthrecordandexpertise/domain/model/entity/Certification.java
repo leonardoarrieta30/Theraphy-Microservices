@@ -1,4 +1,4 @@
-package com.digitalholics.physiotherapistservice.domain.model;
+package com.digitalholics.healthrecordandexpertise.domain.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;

@@ -1,11 +1,10 @@
-package com.digitalholics.physiotherapistservice.mapping;
+package com.digitalholics.healthrecordandexpertise.mapping;
 
-
-import com.digitalholics.physiotherapistservice.domain.model.Certification;
-import com.digitalholics.physiotherapistservice.mapping.configuration.EnhancedModelMapper;
-import com.digitalholics.physiotherapistservice.resources.CertificationResource;
-import com.digitalholics.physiotherapistservice.resources.CreateCertificationResource;
-import com.digitalholics.physiotherapistservice.resources.UpdateCertificationResource;
+import com.digitalholics.healthrecordandexpertise.domain.model.entity.Certification;
+import com.digitalholics.healthrecordandexpertise.mapping.configuration.EnhancedModelMapper;
+import com.digitalholics.healthrecordandexpertise.resource.CertificationResource;
+import com.digitalholics.healthrecordandexpertise.resource.CreateCertificationResource;
+import com.digitalholics.healthrecordandexpertise.resource.UpdateCertificationResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
