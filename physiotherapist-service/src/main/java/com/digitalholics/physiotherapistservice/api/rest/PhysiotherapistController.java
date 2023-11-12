@@ -59,17 +59,18 @@ public class PhysiotherapistController {
     }
 
 
-    @PostMapping("/saveTherapy/{physiotherapistId}/{patientId}")
-    public ResponseEntity<Therapy> saveTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId, @PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
-        if(physiotherapistService.getById(physiotherapistId) == null){
-            return ResponseEntity.notFound().build();
-        }
-        if(physiotherapistService.getPatientById(patientId)==null){
-            return ResponseEntity.notFound().build();
-        }
-        Therapy newTherapy = physiotherapistService.saveTherapyToPatientAndPhysiotherapist(physiotherapistId, patientId,therapy);
-        return ResponseEntity.ok(therapy);
-    }
+    //se puede crear desde el mismo servicio de therapy xD eso creo
+//    @PostMapping("/saveTherapy/{physiotherapistId}/{patientId}")
+//    public ResponseEntity<Therapy> saveTherapy(@PathVariable("physiotherapistId") Integer physiotherapistId, @PathVariable("patientId") Integer patientId, @RequestBody Therapy therapy){
+//        if(physiotherapistService.getById(physiotherapistId) == null){
+//            return ResponseEntity.notFound().build();
+//        }
+//        if(physiotherapistService.getPatientById(patientId)==null){
+//            return ResponseEntity.notFound().build();
+//        }
+//        Therapy newTherapy = physiotherapistService.saveTherapyToPatientAndPhysiotherapist(physiotherapistId, patientId,therapy);
+//        return ResponseEntity.ok(therapy);
+//    }
 
     //se unio con :
 //query did not return a unique result: 2

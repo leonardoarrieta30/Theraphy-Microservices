@@ -117,6 +117,7 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         }).orElseThrow(()-> new ResourceNotFoundException(ENTITY,physiotherapistId));    }
 
 
+    //ni lo uso
     @Override
     public Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId,Integer patientId, Therapy therapy){
         therapy.setPhysiotherapistId(physiotherapistId);
