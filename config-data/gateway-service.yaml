@@ -41,3 +41,7 @@ spring:
           uri: lb://social-service
           predicates:
             - Path=/social/**
+        - id: security-service
+          uri: lb://security-service
+          predicates:
+            - Path=/security/**

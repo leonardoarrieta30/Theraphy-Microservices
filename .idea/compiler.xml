@@ -10,6 +10,7 @@
         <module name="appointment-service" />
         <module name="physiotherapist-service" />
         <module name="gateway-service" />
+        <module name="security-service" />
         <module name="social-service" />
         <module name="healthrecordandexpertise" />
         <module name="patient-service" />
@@ -26,6 +27,7 @@
       <module name="healthrecordandexpertise" options="-parameters" />
       <module name="patient-service" options="-parameters" />
       <module name="physiotherapist-service" options="-parameters" />
+      <module name="security-service" options="-parameters" />
       <module name="social-service" options="-parameters" />
       <module name="therapy-service" options="-parameters" />
     </option>

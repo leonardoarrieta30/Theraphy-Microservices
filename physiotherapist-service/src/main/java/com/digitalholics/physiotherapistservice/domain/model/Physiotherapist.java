@@ -49,6 +49,9 @@ public class Physiotherapist {
 //    @JsonIgnore
 //    private User user;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     private Double fees;
 
 

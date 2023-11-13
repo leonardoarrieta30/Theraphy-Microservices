@@ -70,6 +70,9 @@ public class Patient {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "medical_history_id", referencedColumnName = "id")
 //    private MedicalHistory medicalHistory;
