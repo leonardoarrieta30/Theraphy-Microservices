@@ -74,21 +74,18 @@ public class PatientServiceImpl implements PatientService {
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        Patient patientWithEmail =patientRepository.findPatientByEmail(patientResource.getEmail());
+        Patient patientWithDni =patientRepository.findPatientByDni(patientResource.getDni());
 
-        if (patientWithEmail != null)
+        if (patientWithDni != null)
             throw new ResourceValidationException(ENTITY,
-                    "There is already a patient with the same e-mail address.");
+                    "There is already a patient with the same DNI.");
 
         Patient patient = new Patient();
-        patient.setFirstname(patientResource.getFirstname());
-        patient.setLastname(patientResource.getLastname());
-        patient.setEmail(patientResource.getEmail());
-        patient.setPassword(patientResource.getPassword());
         patient.setPhotoUrl(patientResource.getPhotoUrl());
         patient.setBirthday(patientResource.getBirthday());
         patient.setAppointmentQuantity(patientResource.getAppointmentQuantity());
         patient.setLocation(patientResource.getLocation());
+        patient.setDni(patientResource.getDni());
 
 
 //        List<Physiotherapist> physiotherapists = this.getPhysiotherapists();
@@ -103,7 +100,6 @@ public class PatientServiceImpl implements PatientService {
 
         //Patient patient1 = patientOptional.orElseThrow(() -> new NotFoundException("User exists or equals with id: " + patientResource.getUserId()));
 
-        Integer userIdOfPatient = patientResource.getUserId();
 //        if () {
 //            throw new ResourceNotFoundException("User exists");
 //        } else{
@@ -122,11 +118,14 @@ public class PatientServiceImpl implements PatientService {
 
 // Validar si el userId existe en la lista de fisioterapeutas
         boolean isUserIdInPhysiotherapists = this.isExistsUserIdToPhysiotherapist(patientResource.getUserId());
-        if ((existingPatient != null || isUserIdInPhysiotherapists) || this.getUserById(patientResource.getUserId())) {
-            throw new ResourceNotFoundException("User equals or exists");
-        } else {
-            patient.setUserId(patientResource.getUserId());
-            // Realizar otras operaciones para crear el paciente
+        if (this.getUserById(patientResource.getUserId())) {
+            if(existingPatient != null || isUserIdInPhysiotherapists){
+                throw new ResourceNotFoundException("User equals or exists");
+            }else{
+                patient.setUserId(patientResource.getUserId());
+            }
+        }else {
+            throw new ResourceNotFoundException("User don't found");
         }
 
 
@@ -143,12 +142,11 @@ public class PatientServiceImpl implements PatientService {
 
         return patientRepository.findById(patientId).map(patient ->
                 patientRepository.save(
-                        patient.withFirstname(request.getFirstname())
-                                .withLastname(request.getLastname())
-                                .withPhotoUrl(request.getPhotoUrl())
+                        patient.withPhotoUrl(request.getPhotoUrl())
                                 .withBirthday(request.getBirthday())
                                 .withAppointmentQuantity(request.getAppointmentQuantity())
                                 .withLocation(request.getLocation())
+                                .withDni(request.getDni())
                 )).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));
     }
 
@@ -183,6 +181,7 @@ public class PatientServiceImpl implements PatientService {
         if(user!=null) return true;
         else return false;
     }
+
 //
 //    @Override
 //    public List<Physiotherapist> getPhysiotherapists(){

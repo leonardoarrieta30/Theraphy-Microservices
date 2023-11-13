@@ -9,7 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 public class UserResource {
     private Integer id;
-    //private String username;
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
     private String type;

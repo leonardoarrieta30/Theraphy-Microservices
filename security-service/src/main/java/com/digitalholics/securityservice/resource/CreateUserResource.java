@@ -1,5 +1,6 @@
 package com.digitalholics.securityservice.resource;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,11 +14,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateUserResource {
-/*
     @NotBlank
     @NotNull
     @Size(max = 50)
-    private String username;*/
+    @Column(unique = true)
+    private String firstname;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 50)
+    @Column(unique = true)
+    private String lastname;
 
     @NotNull
     @NotBlank

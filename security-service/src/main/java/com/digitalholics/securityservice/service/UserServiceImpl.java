@@ -6,6 +6,7 @@ import com.digitalholics.securityservice.domain.persistence.UserRepository;
 import com.digitalholics.securityservice.domain.service.UserService;
 import com.digitalholics.securityservice.mapping.exception.ResourceNotFoundException;
 import com.digitalholics.securityservice.mapping.exception.ResourceValidationException;
+import com.digitalholics.securityservice.resource.CreateUserResource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.data.domain.Page;
@@ -50,8 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+    public User create(CreateUserResource userResource) {
+        Set<ConstraintViolation<CreateUserResource>> violations = validator.validate(userResource);
 
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
@@ -59,8 +60,21 @@ public class UserServiceImpl implements UserService {
         if(userRepository.findByUsername(user.getUsername()).isPresent())
             throw new ResourceValidationException(ENTITY, "A user with the same username exists.");*/
 
-        if(userRepository.findByEmail(user.getEmail()).isPresent())
+        if(userRepository.findByEmail(userResource.getEmail()).isPresent())
             throw new ResourceValidationException(ENTITY, "A user with the same email exists.");
+
+        User user = new User();
+        user.setEmail(userResource.getEmail());
+        user.setPassword(userResource.getPassword());
+        user.setFirstname(userResource.getFirstname());
+        user.setLastname(userResource.getLastname());
+
+        if(userResource.getType().equalsIgnoreCase("physiotherapist")  || userResource.getType().equalsIgnoreCase("patient")){
+            user.setType(userResource.getType());
+        }else{
+            throw new ResourceValidationException("Type don't exist");
+        }
+
 
         return userRepository.save(user);
     }
@@ -74,7 +88,9 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findById(userId).map(student ->
                         userRepository.save(
-                                student.withEmail(request.getEmail())
+                                student.withFirstname(request.getFirstname())
+                                        .withLastname(request.getLastname())
+                                        .withEmail(request.getEmail())
                                         .withPassword(request.getPassword())
                                         .withType(request.getType())))
                 .orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));

@@ -13,25 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 public class CreatePatientResource {
 
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    private String firstname;
-
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    private String lastname;
-
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    private String email;
-
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    private String password;
+    private String dni;
 
     @NotNull
     @NotBlank

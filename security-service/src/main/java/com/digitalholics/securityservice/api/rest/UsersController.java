@@ -38,7 +38,7 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity<UserResource> createUser(@RequestBody CreateUserResource resource) {
-        return new ResponseEntity<>(mapper.toResource(userService.create(mapper.toModel(resource))), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.toResource(userService.create(resource)), HttpStatus.CREATED);
     }
     @PutMapping("{userId}")
     public UserResource updateUser(@PathVariable Integer userId,

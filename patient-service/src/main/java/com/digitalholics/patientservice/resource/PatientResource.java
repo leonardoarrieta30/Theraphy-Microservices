@@ -8,23 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientResource {
-
     private Integer id;
-
-    private String firstname;
-
-    private String lastname;
-
-    private String email;
-
-    private String password;
-
+    private String dni;
     private String photoUrl;
-
     private String birthday;
-
     private String appointmentQuantity;
-
     private String location;
     private Integer userId;
 }

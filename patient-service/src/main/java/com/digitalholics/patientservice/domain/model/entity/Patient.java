@@ -1,5 +1,6 @@
 package com.digitalholics.patientservice.domain.model.entity;
 
+import com.digitalholics.patientservice.domain.model.entity.dto.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -23,29 +24,35 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "firstname")
-    private String firstname;
+    //------------------
+//    @NotNull
+//    @NotBlank
+//    @Size(max = 50)
+//    @Column(name = "firstname")
+//    private String firstname;
+//
+//    @NotNull
+//    @NotBlank
+//    @Size(max = 50)
+//    @Column(name = "lastname")
+//    private String lastname;
+//
+//    @NotNull
+//    @NotBlank
+//    @Size(max = 50)
+//    @Column(name = "email")
+//    private String email;
+//
+//    @NotNull
+//    @NotBlank
+//    @Size(max = 50)
+//    @Column(name = "password")
+//    private String password;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "lastname")
-    private String lastname;
+    //------------------
 
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "email")
-    private String email;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "password")
-    private String password;
+    private String dni;
 
     @NotNull
     @NotBlank
@@ -72,6 +79,8 @@ public class Patient {
 
     @Column(name = "user_id")
     private Integer userId;
+
+
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "medical_history_id", referencedColumnName = "id")

@@ -25,12 +25,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /*
+
     @NotBlank
     @NotNull
     @Size(max = 50)
     @Column(unique = true)
-    private String username;*/
+    private String firstname;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 50)
+    @Column(unique = true)
+    private String lastname;
+
 
     @NotNull
     @NotBlank

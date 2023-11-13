@@ -6,20 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdatePatientResource {
-
-    private String firstname;
-
-    private String lastname;
-
-    private String email;
-
-    private String password;
-
+    private Integer id;
+    private String dni;
     private String photoUrl;
-
     private String birthday;
-
     private String appointmentQuantity;
-
     private String location;
 }

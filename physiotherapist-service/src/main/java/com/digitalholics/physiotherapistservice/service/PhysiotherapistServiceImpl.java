@@ -121,16 +121,15 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
 // Validar si el userId existe en la lista de fisioterapeutas
         boolean isUserIdInPatients = this.isExistsUserIdToPatient(physiotherapistResource.getUserId());
-        if ((existingPatient != null || isUserIdInPatients) || this.getUserById(physiotherapistResource.getUserId())) {
-            throw new ResourceNotFoundException("User equals or exists");
-        } else {
-            physiotherapist.setUserId(physiotherapistResource.getUserId());
-            // Realizar otras operaciones para crear el paciente
+        if (this.getUserById(physiotherapistResource.getUserId())) {
+            if(existingPatient != null || isUserIdInPatients){
+                throw new ResourceNotFoundException("User equals or exists");
+            }else{
+                physiotherapist.setUserId(physiotherapistResource.getUserId());
+            }
+        }else {
+            throw new ResourceNotFoundException("User don't found");
         }
-
-
-
-
 
         return physiotherapistRepository.save(physiotherapist);
 
