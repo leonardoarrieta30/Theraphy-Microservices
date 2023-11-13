@@ -3,6 +3,7 @@ package com.digitalholics.physiotherapistservice.domain.service;
 import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
 import com.digitalholics.physiotherapistservice.domain.model.dto.Patient;
 import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
+import com.digitalholics.physiotherapistservice.domain.model.dto.User;
 import com.digitalholics.physiotherapistservice.resources.CreatePhysiotherapistResource;
 import com.digitalholics.physiotherapistservice.resources.UpdatePhysiotherapistResource;
 import org.springframework.data.domain.Page;
@@ -21,4 +22,11 @@ public interface PhysiotherapistService {
     Therapy saveTherapyToPatientAndPhysiotherapist(Integer physiotherapistId, Integer patientId, Therapy therapy);
     Therapy getTherapyByPhysiotherapistId(Integer physiotherapistId);
     Patient getPatientById(Integer patientId);
+    Boolean getUserById(Integer userId);
+    List<Patient> getPatients();
+    Integer getPatient(Integer patientId);
+
+    Integer getUserId(Integer userId);
+
+    Boolean isExistsUserIdToPatient(Integer userId);
 }

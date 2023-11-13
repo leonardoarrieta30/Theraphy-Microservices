@@ -1,14 +1,14 @@
-package com.digitalholics.physiotherapistservice.resources;
+package com.digitalholics.patientservice.domain.model.entity.dto;
+
 
 import lombok.*;
 
 @Getter
 @Setter
-@With
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhysiotherapistResource {
-    private Integer id;
+@Data
+public class Physiotherapist {
     private String dni;
     private String specialization;
     private Integer age;
@@ -21,5 +21,4 @@ public class PhysiotherapistResource {
     private Integer yearsExperience;
     private Double fees;
     private Integer userId;
-    //private UserResource user;
 }

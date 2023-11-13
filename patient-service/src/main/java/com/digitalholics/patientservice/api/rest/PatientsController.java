@@ -110,4 +110,11 @@ public class PatientsController {
 
     }
 
+    @GetMapping("userId/{userId}")
+    //@PreAuthorize("hasAuthority('patient:read')")
+    public Integer getPatientByUserId(@PathVariable Integer userId) {
+        return patientService.getUserId(userId);
+    }
+
+
 }

@@ -52,4 +52,6 @@ public class CreatePatientResource {
     @NotBlank
     private String location;
 
+    private Integer userId;
+
 }

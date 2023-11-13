@@ -26,4 +26,5 @@ public class PatientResource {
     private String appointmentQuantity;
 
     private String location;
+    private Integer userId;
 }

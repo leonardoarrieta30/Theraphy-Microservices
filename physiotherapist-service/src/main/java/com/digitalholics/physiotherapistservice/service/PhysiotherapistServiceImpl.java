@@ -2,6 +2,7 @@ package com.digitalholics.physiotherapistservice.service;
 
 import com.digitalholics.physiotherapistservice.domain.model.dto.Patient;
 import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
+import com.digitalholics.physiotherapistservice.domain.model.dto.User;
 import com.digitalholics.physiotherapistservice.domain.persistence.PhysiotherapistRepository;
 import com.digitalholics.physiotherapistservice.domain.service.PhysiotherapistService;
 import com.digitalholics.physiotherapistservice.feignClients.TherapyFeignClient;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import org.webjars.NotFoundException;
 import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -88,7 +90,51 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         physiotherapist.setPatientQuantity(0);
         physiotherapist.setFees(physiotherapistResource.getFees());
 
-        return physiotherapistRepository.save(physiotherapist);    }
+//        List<Patient> patients = this.getPatients();
+//        for (int i= 0; i< this.getPatients().size(); i++){
+//            if(patients.get(i).getUserId().equals(physiotherapistResource.getUserId())){
+//                throw new ResourceNotFoundException("User equals");
+//            }
+//        }
+
+//
+//        Optional<Physiotherapist> physiotherapistOptional = physiotherapistRepository.findByUserId(physiotherapistResource.getUserId());
+//
+//        Physiotherapist physiotherapist1 = physiotherapistOptional.orElseThrow(() -> new NotFoundException("User exists or equals with id: " + physiotherapistResource.getUserId()));
+//
+//        if (this.getUserById(physiotherapistResource.getUserId()) == null) {
+//            throw new ResourceNotFoundException("User not found");
+//        } else if (physiotherapist1.getUserId().equals(physiotherapistResource.getUserId())) {
+//            throw new ResourceNotFoundException("User exists");
+//        } else{
+//            physiotherapist.setUserId(physiotherapistResource.getUserId());
+//        }
+
+//
+//        if(this.getUserById(physiotherapistResource.getUserId()) == null){
+//            throw new ResourceNotFoundException("User not found");
+//        }else{
+//            physiotherapist.setUserId(physiotherapistResource.getUserId());
+//        }
+
+        Physiotherapist existingPatient = physiotherapistRepository.findPhysiotherapistByUserId(physiotherapistResource.getUserId());
+
+// Validar si el userId existe en la lista de fisioterapeutas
+        boolean isUserIdInPatients = this.isExistsUserIdToPatient(physiotherapistResource.getUserId());
+        if ((existingPatient != null || isUserIdInPatients) || this.getUserById(physiotherapistResource.getUserId())) {
+            throw new ResourceNotFoundException("User equals or exists");
+        } else {
+            physiotherapist.setUserId(physiotherapistResource.getUserId());
+            // Realizar otras operaciones para crear el paciente
+        }
+
+
+
+
+
+        return physiotherapistRepository.save(physiotherapist);
+
+    }
 
     @Override
     public Physiotherapist update(Integer physiotherapistId, UpdatePhysiotherapistResource request) {
@@ -140,7 +186,37 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
     }
 
 
+    @Override
+    public Boolean getUserById(Integer userId){
+        User user  = restTemplate.getForObject("http://localhost:7013/api/v1/users/" + userId, User.class);
+        if(user!=null) return true;
+        else return false;
+    }
 
+
+    @Override
+    public List<Patient> getPatients(){
+        List<Patient> patientList  = Collections.singletonList(restTemplate.getForObject("http://localhost:7010/api/v1/patients/allPatients", Patient.class));
+        return patientList;
+    }
+
+    @Override
+    public Integer getPatient(Integer patientId){
+        Patient patient = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId ,  Patient.class);
+        return patient.getUserId();
+    }
+
+    @Override
+    public Integer getUserId(Integer userId) {
+        Optional<Physiotherapist> physiotherapist = this.physiotherapistRepository.findByUserId(userId);
+        return physiotherapist.map(Physiotherapist::getUserId).orElse(null);
+    }
+
+    @Override
+    public Boolean isExistsUserIdToPatient(Integer userId){
+        Integer userId2 = restTemplate.getForObject("http://localhost:7010/api/v1/patients/userId/" + userId , Integer.class);
+        return userId2 != null;
+    }
 
 
 

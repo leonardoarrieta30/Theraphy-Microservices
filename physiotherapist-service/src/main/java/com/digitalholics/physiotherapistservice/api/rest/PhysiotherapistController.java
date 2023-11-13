@@ -1,9 +1,5 @@
 package com.digitalholics.physiotherapistservice.api.rest;
 
-
-
-import com.digitalholics.physiotherapistservice.domain.model.Physiotherapist;
-import com.digitalholics.physiotherapistservice.domain.model.dto.Therapy;
 import com.digitalholics.physiotherapistservice.domain.service.PhysiotherapistService;
 import com.digitalholics.physiotherapistservice.mapping.PhysiotherapistMapper;
 import com.digitalholics.physiotherapistservice.resources.CreatePhysiotherapistResource;
@@ -56,6 +52,11 @@ public class PhysiotherapistController {
     @DeleteMapping("{physiotherapistId}")
     public ResponseEntity<?> deletePhysiotherapist(@PathVariable Integer physiotherapistId) {
         return physiotherapistService.delete(physiotherapistId);
+    }
+    @GetMapping("userId/{userId}")
+    //@PreAuthorize("hasAuthority('patient:read')")
+    public Integer getPhysiotherapistByUserId(@PathVariable Integer userId) {
+        return physiotherapistService.getUserId(userId);
     }
 
 

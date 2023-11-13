@@ -2,7 +2,9 @@ package com.digitalholics.patientservice.service;
 
 import com.digitalholics.patientservice.domain.model.entity.Patient;
 import com.digitalholics.patientservice.domain.model.entity.dto.Diagnosis;
+import com.digitalholics.patientservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.patientservice.domain.model.entity.dto.Therapy;
+import com.digitalholics.patientservice.domain.model.entity.dto.User;
 import com.digitalholics.patientservice.domain.persistence.PatientRepository;
 import com.digitalholics.patientservice.domain.service.PatientService;
 import com.digitalholics.patientservice.feignsClients.DiagnosisFeignClient;
@@ -18,8 +20,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.webjars.NotFoundException;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -34,12 +40,15 @@ public class PatientServiceImpl implements PatientService {
     private final DiagnosisFeignClient diagnosisFeignClient;
     private final TherapyFeignClient therapyFeignClient;
 
+    private final RestTemplate restTemplate;
+
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository, Validator validator, DiagnosisFeignClient diagnosisFeignClient, TherapyFeignClient therapyFeignClient) {
+    public PatientServiceImpl(PatientRepository patientRepository, Validator validator, DiagnosisFeignClient diagnosisFeignClient, TherapyFeignClient therapyFeignClient, RestTemplate restTemplate) {
         this.patientRepository = patientRepository;
         this.validator = validator;
         this.diagnosisFeignClient = diagnosisFeignClient;
         this.therapyFeignClient = therapyFeignClient;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -80,6 +89,47 @@ public class PatientServiceImpl implements PatientService {
         patient.setBirthday(patientResource.getBirthday());
         patient.setAppointmentQuantity(patientResource.getAppointmentQuantity());
         patient.setLocation(patientResource.getLocation());
+
+
+//        List<Physiotherapist> physiotherapists = this.getPhysiotherapists();
+//        for (int i= 0; i< this.getPhysiotherapists().size(); i++){
+//            if(physiotherapists.get(i).getUserId().equals(patientResource.getUserId())){
+//                throw new ResourceNotFoundException("User equals");
+//            }
+//        }
+
+
+       // Integer physiotherapistIdWithUser = this.getPhysiotherapist(patientResource.getUserId());
+
+        //Patient patient1 = patientOptional.orElseThrow(() -> new NotFoundException("User exists or equals with id: " + patientResource.getUserId()));
+
+        Integer userIdOfPatient = patientResource.getUserId();
+//        if () {
+//            throw new ResourceNotFoundException("User exists");
+//        } else{
+//            patient.setUserId(patientResource.getUserId());
+//        }
+
+//        if (patientResource.getUserId().equals(patientRepository.findPatientByUserId(patientResource.getUserId()).getUserId()) && this.getUserIdByPhysiotherapist(patientResource.getUserId())){
+//            throw new ResourceNotFoundException("User equals or exists");
+//        } else{
+//            patient.setUserId(patientResource.getUserId());
+//        }
+
+
+        // Buscar al paciente por userId
+        Patient existingPatient = patientRepository.findPatientByUserId(patientResource.getUserId());
+
+// Validar si el userId existe en la lista de fisioterapeutas
+        boolean isUserIdInPhysiotherapists = this.isExistsUserIdToPhysiotherapist(patientResource.getUserId());
+        if ((existingPatient != null || isUserIdInPhysiotherapists) || this.getUserById(patientResource.getUserId())) {
+            throw new ResourceNotFoundException("User equals or exists");
+        } else {
+            patient.setUserId(patientResource.getUserId());
+            // Realizar otras operaciones para crear el paciente
+        }
+
+
 
         return patientRepository.save(patient);
     }
@@ -124,6 +174,36 @@ public class PatientServiceImpl implements PatientService {
         List<Diagnosis> diagnosisList = diagnosisFeignClient.getDiagnosisByPatientId(patientId);
         return diagnosisList;
     }
+
+
+
+    @Override
+    public Boolean getUserById(Integer userId){
+        User user  = restTemplate.getForObject("http://localhost:7013/api/v1/users/" + userId, User.class);
+        if(user!=null) return true;
+        else return false;
+    }
+//
+//    @Override
+//    public List<Physiotherapist> getPhysiotherapists(){
+//        List<Physiotherapist> physiotherapistList  = Collections.singletonList(restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists", Physiotherapist.class));
+//        return physiotherapistList;
+//    }
+
+
+    @Override
+    public Integer getUserId(Integer userId) {
+        Optional<Patient> patient = this.patientRepository.findByUserId(userId);
+        return patient.map(Patient::getUserId).orElse(null);
+    }
+
+
+    @Override
+    public Boolean isExistsUserIdToPhysiotherapist(Integer userId){
+        Integer userId2 = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/userId/" + userId , Integer.class);
+        return userId2 != null;
+    }
+
 
 
 
