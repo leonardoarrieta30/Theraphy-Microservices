@@ -35,9 +35,4 @@ public class UpdateUserResource {
     @Size(max = 120)
     private String password;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 20)
-    private String type;
-
 }

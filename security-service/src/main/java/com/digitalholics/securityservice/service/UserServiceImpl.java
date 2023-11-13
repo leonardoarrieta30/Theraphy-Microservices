@@ -69,11 +69,11 @@ public class UserServiceImpl implements UserService {
         user.setFirstname(userResource.getFirstname());
         user.setLastname(userResource.getLastname());
 
-        if(userResource.getType().equalsIgnoreCase("physiotherapist")  || userResource.getType().equalsIgnoreCase("patient")){
-            user.setType(userResource.getType());
-        }else{
-            throw new ResourceValidationException("Type don't exist");
-        }
+//        if(userResource.getType().equalsIgnoreCase("physiotherapist")  || userResource.getType().equalsIgnoreCase("patient")){
+//            user.setType(userResource.getType());
+//        }else{
+//            throw new ResourceValidationException("Type don't exist");
+//        }
 
 
         return userRepository.save(user);
@@ -91,8 +91,7 @@ public class UserServiceImpl implements UserService {
                                 student.withFirstname(request.getFirstname())
                                         .withLastname(request.getLastname())
                                         .withEmail(request.getEmail())
-                                        .withPassword(request.getPassword())
-                                        .withType(request.getType())))
+                                        .withPassword(request.getPassword())))
                 .orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
     }
 
