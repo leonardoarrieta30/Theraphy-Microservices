@@ -135,7 +135,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
         if(appointment == null)
             throw new ResourceNotFoundException("Appointment not found");
-        Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
+        Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:8080/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
         return theraphy2;
     }
 
@@ -147,7 +147,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public Theraphy2 getTherapyById(Integer therapyId){
-        Theraphy2 therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + therapyId, Theraphy2.class);
+        Theraphy2 therapy = restTemplate.getForObject("http://localhost:8080/api/v1/theraphies/" + therapyId, Theraphy2.class);
         return therapy;
     }
 

@@ -81,12 +81,12 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
     @Override
     public Patient getPatientById(Integer patientId){
-        Patient patient  = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId, Patient.class);
+        Patient patient  = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId, Patient.class);
         return patient;
     }
     @Override
     public Physiotherapist getPhysiotherapistById(Integer physiotherapistId){
-        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:7008/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
+        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
         return physiotherapist;
     }
 

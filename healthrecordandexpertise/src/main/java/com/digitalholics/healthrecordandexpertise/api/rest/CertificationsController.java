@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/certifications", produces = "application/json")
+@RequestMapping(value = "/api/v1/healthrecordandexpertise/certifications", produces = "application/json")
 @Tag(name = "Certifications", description = "Create, read, update and delete certifications")
 public class CertificationsController {
     private final CertificationService certificationService;

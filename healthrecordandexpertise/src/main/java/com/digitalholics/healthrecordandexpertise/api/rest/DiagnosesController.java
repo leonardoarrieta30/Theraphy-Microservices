@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/diagnoses", produces = "application/json")
+@RequestMapping(value = "/api/v1/healthrecordandexpertise/diagnoses", produces = "application/json")
 @Tag(name = "Diagnoses", description = "Read and delete diagnoses")
 public class DiagnosesController {
 

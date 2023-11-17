@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/medical-histories", produces = "application/json")
+@RequestMapping(value = "/api/v1/healthrecordandexpertise/medical-histories", produces = "application/json")
 @Tag(name = "MedicalHistories", description = "Create, read, update and delete medical histories")
 public class MedicalHistoriesController {
 

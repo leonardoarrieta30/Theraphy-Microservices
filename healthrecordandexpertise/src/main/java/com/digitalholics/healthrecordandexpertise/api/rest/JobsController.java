@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/jobs", produces = "application/json")
+@RequestMapping(value = "/api/v1/healthrecordandexpertise/jobs", produces = "application/json")
 @Tag(name = "Jobs", description = "Create, read, update and delete jobs")
 public class JobsController {
     private final JobService jobService;

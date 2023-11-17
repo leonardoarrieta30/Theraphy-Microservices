@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "healthrecordandexpertise-service", url = "http://localhost:7011")
+@FeignClient(name = "healthrecordandexpertise-service", url = "http://localhost:8080")
 public interface DiagnosisFeignClient {
 
 

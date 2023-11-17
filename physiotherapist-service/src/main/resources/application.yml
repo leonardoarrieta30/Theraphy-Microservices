@@ -1,11 +1,5 @@
-server.port: 7008
+server.port: 7011
 server.error.include-message: always
-
-
-logging:
-level:
-root: INFO
-se.magnus: DEBUG
 
 spring:
   datasource:
@@ -32,5 +26,7 @@ eureka:
       instance:
       leaseRenewalIntervalInSeconds: 5
       leaseExpirationDurationInSeconds: 5
+
+
 
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(name = "therapy-service", url = "http://localhost:7009")
+@FeignClient(name = "therapy-service", url = "http://localhost:8080")
 //@RequestMapping("/api/v1/theraphies")
 public interface TherapyFeignClient {
 
