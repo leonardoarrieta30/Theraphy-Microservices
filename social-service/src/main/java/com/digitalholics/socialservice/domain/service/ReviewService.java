@@ -22,4 +22,7 @@ public interface ReviewService {
     ResponseEntity<?> delete(Integer reviewId);
     Patient getPatientById(Integer patientId);
     Physiotherapist getPhysiotherapistById(Integer physiotherapistId);
+    List<Review> getPatientId(Integer patientId);
+
+    List<Review> getPatientIdAndPhysiotherapistId(Integer patientId, Integer physiotherapistId);
 }

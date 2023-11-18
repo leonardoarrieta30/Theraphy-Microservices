@@ -83,11 +83,9 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         physiotherapist.setLocation(physiotherapistResource.getLocation());
         physiotherapist.setBirthdayDate(physiotherapistResource.getBirthdayDate());
         physiotherapist.setPhotoUrl(physiotherapistResource.getPhotoUrl());
-        physiotherapist.setConsultationQuantity(0);
         physiotherapist.setSpecialization(physiotherapistResource.getSpecialization());
         physiotherapist.setYearsExperience(physiotherapistResource.getYearsExperience());
         physiotherapist.setRating(0.0);
-        physiotherapist.setPatientQuantity(0);
         physiotherapist.setFees(physiotherapistResource.getFees());
 
 //        List<Patient> patients = this.getPatients();
@@ -142,13 +140,11 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
         physiotherapist.setDni(request.getDni() != null ? request.getDni() : physiotherapist.getDni());
         physiotherapist.setAge(request.getAge() != null ? request.getAge() : physiotherapist.getAge());
         physiotherapist.setPhotoUrl(request.getPhotoUrl() != null ? request.getPhotoUrl() : physiotherapist.getPhotoUrl());
-        physiotherapist.setPatientQuantity(request.getPatientQuantity() != null ? request.getPatientQuantity() : physiotherapist.getPatientQuantity());
         physiotherapist.setLocation(request.getLocation() != null ? request.getLocation() : physiotherapist.getLocation());
         physiotherapist.setBirthdayDate(request.getBirthdayDate() != null ? request.getBirthdayDate() : physiotherapist.getBirthdayDate());
         physiotherapist.setRating(request.getRating() != null ? request.getRating() : physiotherapist.getRating());
         physiotherapist.setSpecialization(request.getSpecialization() != null ? request.getSpecialization() : physiotherapist.getSpecialization());
         physiotherapist.setYearsExperience(request.getYearsExperience() != null ? request.getYearsExperience() : physiotherapist.getYearsExperience());
-        physiotherapist.setConsultationQuantity(request.getConsultationQuantity() != null ? request.getConsultationQuantity() : physiotherapist.getConsultationQuantity());
         physiotherapist.setFees(request.getFees() != null ? request.getFees() : physiotherapist.getFees());
 
         return physiotherapistRepository.save(physiotherapist);

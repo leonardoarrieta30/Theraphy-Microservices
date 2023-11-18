@@ -12,7 +12,6 @@ public class PatientResource {
     private String dni;
     private String photoUrl;
     private String birthday;
-    private String appointmentQuantity;
     private String location;
     private Integer userId;
 }

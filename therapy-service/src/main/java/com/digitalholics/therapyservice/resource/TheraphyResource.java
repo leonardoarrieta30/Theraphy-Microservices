@@ -10,8 +10,6 @@ import lombok.*;
 public class TheraphyResource {
     private Integer id;
     private String theraphyName;
-    private String appointmentQuantity;
-    private String appointmentGap;
     private String startAt;
     private String finishAt;
     private Integer patientId;

@@ -83,7 +83,6 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = new Patient();
         patient.setPhotoUrl(patientResource.getPhotoUrl());
         patient.setBirthday(patientResource.getBirthday());
-        patient.setAppointmentQuantity(patientResource.getAppointmentQuantity());
         patient.setLocation(patientResource.getLocation());
         patient.setDni(patientResource.getDni());
 
@@ -144,7 +143,6 @@ public class PatientServiceImpl implements PatientService {
                 patientRepository.save(
                         patient.withPhotoUrl(request.getPhotoUrl())
                                 .withBirthday(request.getBirthday())
-                                .withAppointmentQuantity(request.getAppointmentQuantity())
                                 .withLocation(request.getLocation())
                                 .withDni(request.getDni())
                 )).orElseThrow(() -> new ResourceNotFoundException(ENTITY, patientId));

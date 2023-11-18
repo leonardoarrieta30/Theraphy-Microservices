@@ -17,8 +17,6 @@ public class Physiotherapist {
     private String photoUrl;
     private String birthdayDate;
     private Double rating;
-    private Integer consultationQuantity;
-    private Integer patientQuantity;
     private Integer yearsExperience;
     private Double fees;
     private Integer userId;

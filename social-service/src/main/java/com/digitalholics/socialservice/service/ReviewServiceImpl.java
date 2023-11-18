@@ -73,6 +73,30 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> getPatientId(Integer patientId){
+        List<Review> reviews = reviewRepository.findByPatientId(patientId);
+
+        if(reviews.isEmpty())
+            throw new ResourceValidationException(ENTITY,
+                    "Not found Reviews for this patient");
+
+        return reviews;
+    }
+
+
+    @Override
+    public List<Review> getPatientIdAndPhysiotherapistId(Integer patientId, Integer physiotherapistId){
+        List<Review> reviews = reviewRepository.findByPatientIdAndPhysiotherapistId(patientId, physiotherapistId);
+
+        if(reviews.isEmpty())
+            throw new ResourceValidationException(ENTITY,
+                    "Not found Reviews for this patient and this physiotherapist");
+
+        return reviews;
+    }
+
+
+    @Override
     public Review create(CreateReviewResource reviewResource) {
         Set<ConstraintViolation<CreateReviewResource>> violations = validator.validate(reviewResource);
 
@@ -161,6 +185,7 @@ public class ReviewServiceImpl implements ReviewService {
         Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
         return physiotherapist;
     }
+
 
 
 }

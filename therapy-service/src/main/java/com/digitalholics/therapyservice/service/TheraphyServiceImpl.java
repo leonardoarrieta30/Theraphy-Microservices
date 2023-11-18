@@ -79,8 +79,6 @@ public class TheraphyServiceImpl implements TheraphyService {
 
         Theraphy theraphy = new Theraphy();
         theraphy.setTheraphyName(theraphyResource.getTheraphyName());
-        theraphy.setAppointmentQuantity(theraphyResource.getAppointmentQuantity());
-        theraphy.setAppointmentGap(theraphyResource.getAppointmentGap());
         theraphy.setStartAt(theraphyResource.getStartAt());
         theraphy.setFinishAt(theraphyResource.getFinishAt());
 
@@ -104,9 +102,7 @@ public class TheraphyServiceImpl implements TheraphyService {
 
         theraphy.setTheraphyName(theraphyResource.getTheraphyName() != null ? theraphyResource.getTheraphyName() : theraphy.getTheraphyName());
         theraphy.setStartAt(theraphyResource.getStartAt() != null ? theraphyResource.getStartAt() : theraphy.getStartAt());
-        theraphy.setAppointmentGap(theraphyResource.getAppointmentGap() != null ? theraphyResource.getAppointmentGap() : theraphy.getAppointmentGap());
         theraphy.setFinishAt(theraphyResource.getFinishAt() != null ? theraphyResource.getFinishAt() : theraphy.getFinishAt());
-        theraphy.setAppointmentQuantity(theraphyResource.getAppointmentQuantity() != null ? theraphyResource.getAppointmentQuantity() : theraphy.getAppointmentQuantity());
         //theraphy.setPatientId(this.getPatientById(theraphyResource.getPatientId()) != null ? theraphyResource.getPatientId() : theraphy.getPatientId());
         //theraphy.setPhysiotherapistId(this.getPhysiotherapistById(theraphyResource.getPhysiotherapistId()) != null ? theraphyResource.getPhysiotherapistId() : theraphy.getPhysiotherapistId());
 

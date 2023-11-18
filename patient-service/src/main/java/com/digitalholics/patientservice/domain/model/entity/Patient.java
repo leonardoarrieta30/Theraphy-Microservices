@@ -66,11 +66,6 @@ public class Patient {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String birthday;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "appointment_quantity")
-    @Size(max = 300)
-    private String appointmentQuantity;
 
     @NotNull
     @NotBlank

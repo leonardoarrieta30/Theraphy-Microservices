@@ -11,4 +11,8 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review,Integer> {
 
     List<Review> findByPhysiotherapistId(Integer physiotherapistId);
+    List<Review> findByPatientId(Integer patientId);
+
+    List<Review> findByPatientIdAndPhysiotherapistId(Integer patientId, Integer physiotherapistId);
+
 }

@@ -35,12 +35,6 @@ public class Physiotherapist {
 
     private Double rating;
 
-    @Column(name = "consultation_quantity")
-    private Integer consultationQuantity;
-
-    @Column(name = "patient_quantity")
-    private Integer patientQuantity;
-
     @Column(name = "years_experience")
     private Integer yearsExperience;
 

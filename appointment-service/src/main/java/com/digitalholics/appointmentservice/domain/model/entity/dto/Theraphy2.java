@@ -9,8 +9,6 @@ import lombok.*;
 @Data
 public class Theraphy2 {
     private String theraphyName;
-    private String appointmentQuantity;
-    private String appointmentGap;
     private String startAt;
     private String finishAt;
     private Integer patientId;

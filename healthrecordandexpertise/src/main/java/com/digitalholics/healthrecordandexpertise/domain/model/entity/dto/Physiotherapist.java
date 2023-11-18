@@ -20,8 +20,6 @@ public class Physiotherapist {
     private String photoUrl;
     private String birthdayDate;
     private Double rating;
-    private Integer consultationQuantity;
-    private Integer patientQuantity;
     private Integer yearsExperience;
     //    @OneToOne
 //    @JoinColumn(name = "user_id")

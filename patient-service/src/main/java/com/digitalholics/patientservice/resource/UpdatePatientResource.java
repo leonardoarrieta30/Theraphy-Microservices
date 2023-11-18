@@ -10,6 +10,5 @@ public class UpdatePatientResource {
     private String dni;
     private String photoUrl;
     private String birthday;
-    private String appointmentQuantity;
     private String location;
 }

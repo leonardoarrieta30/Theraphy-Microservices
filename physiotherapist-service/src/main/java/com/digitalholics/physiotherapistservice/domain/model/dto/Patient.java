@@ -15,7 +15,6 @@ public class Patient {
     private String password;
     private String photoUrl;
     private String birthday;
-    private String appointmentQuantity;
     private String location;
     private Integer userId;
 }

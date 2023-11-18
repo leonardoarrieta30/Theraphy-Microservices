@@ -28,17 +28,6 @@ public class Theraphy {
     @Size(max = 300)
     private String theraphyName;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "appointment_quantity")
-    @Size(max = 300)
-    private String appointmentQuantity;
-
-    @NotNull
-    @NotBlank
-    @Column(name = "appointment_gap")
-    @Size(max = 300)
-    private String appointmentGap;
 
     @NotNull
     @NotBlank

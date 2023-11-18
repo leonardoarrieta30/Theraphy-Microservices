@@ -8,8 +8,6 @@ import lombok.*;
 public class Therapy {
 
     private String theraphyName;
-    private String appointmentQuantity;
-    private String appointmentGap;
     private String startAt;
     private String finishAt;
     //private Integer appointmentId;

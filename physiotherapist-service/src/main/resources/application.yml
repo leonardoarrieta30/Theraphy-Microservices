@@ -1,4 +1,4 @@
-server.port: 7013
+server.port: 7010
 server.error.include-message: always
 
 spring:

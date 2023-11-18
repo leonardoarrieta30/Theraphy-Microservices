@@ -40,6 +40,16 @@ public class ReviewsController {
         return mapper.modelListPage(reviewService.getByPhysiotherapistId(physiotherapistId), pageable);
     }
 
+    @GetMapping("byPatientId/{patientId}")
+    public Page<ReviewResource> getReviewsByPatientId(@PathVariable Integer patientId, Pageable pageable) {
+        return mapper.modelListPage(reviewService.getPatientId(patientId), pageable);
+    }
+
+    @GetMapping("byPatientIdAndPhysiotherapistId/{patientId}/{physiotherapistId}")
+    public Page<ReviewResource> getReviewsByPatientIdAndPhysiotherapistId(@PathVariable Integer patientId, @PathVariable Integer physiotherapistId, Pageable pageable) {
+        return mapper.modelListPage(reviewService.getPatientIdAndPhysiotherapistId(patientId, physiotherapistId), pageable);
+    }
+
 
     @PostMapping
     public ResponseEntity<ReviewResource> createReview(@RequestBody CreateReviewResource resource) {
