@@ -28,11 +28,15 @@ public interface AppointmentService {
     ResponseEntity<?> delete(Integer appointmentId);
     Theraphy2 getTherapyByAppointmentId(Integer appointmentId);
 
-    List<Appointment> getAppointmentsByTherapyId(Integer therapyId);
+ //   List<Appointment> getAppointmentsByTherapyId(Integer therapyId);
     Appointment update(Integer appointmentId, Appointment request);
 
     Theraphy2 getTherapyById(Integer patientId);
    // Theraphy2 saveTherapy(Integer appointmentId, Theraphy2 theraphy2);
+
+    Boolean getPatient(Integer patientId);
+
+    Boolean getPhysiotherapist(Integer physiotherapistId);
 
 
 }

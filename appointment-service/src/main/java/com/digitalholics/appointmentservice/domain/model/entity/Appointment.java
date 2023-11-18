@@ -26,8 +26,10 @@ public class Appointment {
     private String date;
     private String hour;
     private String place;
-    @Column(name = "therapy_id")
-    private Integer therapyId;
+    @Column(name = "patient_id")
+    private Integer patientId;
+    @Column(name = "physiotherapist_id")
+    private Integer physiotherapistId;
 
 //
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)

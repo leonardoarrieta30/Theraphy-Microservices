@@ -6,6 +6,8 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Physiotherapist {
     private Integer id;
     private String dni;
@@ -19,6 +21,7 @@ public class Physiotherapist {
     private Integer patientQuantity;
     private Integer yearsExperience;
     private Double fees;
+    private Integer userId;
 //    private Appointment appointment;
 //
 //    public Appointment getAppointment(){

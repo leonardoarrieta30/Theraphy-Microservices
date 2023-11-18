@@ -16,5 +16,6 @@ public class CreateAppointmentResource {
     private String date;
     private String hour;
     private String place;
-    private Integer therapyId;
+    private Integer patientId;
+    private Integer physiotherapistId;
 }

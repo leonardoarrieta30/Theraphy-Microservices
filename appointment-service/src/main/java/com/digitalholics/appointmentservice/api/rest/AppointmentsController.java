@@ -176,10 +176,10 @@ public class AppointmentsController {
     }
 
 
-    @GetMapping("getAppointmentsByTherapyId/{therapyId}")
-    public List<Appointment> getAppointmentsByTherapyId(@PathVariable("therapyId") Integer therapyId){
-        return appointmentService.getAppointmentsByTherapyId(therapyId);
-    }
+//    @GetMapping("getAppointmentsByTherapyId/{therapyId}")
+//    public List<Appointment> getAppointmentsByTherapyId(@PathVariable("therapyId") Integer therapyId){
+//        return appointmentService.getAppointmentsByTherapyId(therapyId);
+//    }
 
 
 

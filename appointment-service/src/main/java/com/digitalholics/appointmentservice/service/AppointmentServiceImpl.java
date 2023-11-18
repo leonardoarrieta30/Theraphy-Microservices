@@ -2,6 +2,7 @@ package com.digitalholics.appointmentservice.service;
 
 
 import com.digitalholics.appointmentservice.domain.model.entity.Appointment;
+import com.digitalholics.appointmentservice.domain.model.entity.dto.Patient;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.Physiotherapist;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.ResponseDTO;
 import com.digitalholics.appointmentservice.domain.model.entity.dto.Theraphy2;
@@ -105,10 +106,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setDiagnosis(appointmentResource.getDiagnosis());
         appointment.setTopic(appointmentResource.getTopic());
 
-        if(this.getTherapyById(appointmentResource.getTherapyId()) == null){
-            throw new ResourceNotFoundException("Therapy not found");
+
+        if(this.getPhysiotherapist(appointmentResource.getPhysiotherapistId())){
+            appointment.setPhysiotherapistId(appointmentResource.getPhysiotherapistId());
         }else{
-            appointment.setTherapyId(appointmentResource.getTherapyId());
+            throw new ResourceNotFoundException("PhysiotherapistId not found");
+        }
+
+        if(this.getPatient(appointmentResource.getPatientId())){
+            appointment.setPatientId(appointmentResource.getPatientId());
+        }else{
+            throw new ResourceNotFoundException("Patient not found");
         }
 
         return appointmentRepository.save(appointment);
@@ -139,17 +147,34 @@ public class AppointmentServiceImpl implements AppointmentService {
         return theraphy2;
     }
 
-    public List<Appointment> getAppointmentsByTherapyId(Integer therapyId){
-        if(this.getTherapyById(therapyId)==null){
-            throw new ResourceNotFoundException("Therapy not found");
-        }
-        return appointmentRepository.findAppointmentsByTherapyId(therapyId);
-    }
+//    public List<Appointment> getAppointmentsByTherapyId(Integer therapyId){
+//        if(this.getTherapyById(therapyId)==null){
+//            throw new ResourceNotFoundException("Therapy not found");
+//        }
+//        return appointmentRepository.findAppointmentsByTherapyId(therapyId);
+//    }
 
     public Theraphy2 getTherapyById(Integer therapyId){
         Theraphy2 therapy = restTemplate.getForObject("http://localhost:8080/api/v1/theraphies/" + therapyId, Theraphy2.class);
         return therapy;
     }
+
+
+    @Override
+    public Boolean getPatient(Integer patientId){
+        Patient patient = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId ,  Patient.class);
+        if(patient!= null) return true;
+        else return false;
+    }
+    @Override
+    public Boolean getPhysiotherapist(Integer physiotherapistId){
+        Physiotherapist physiotherapist = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/" + physiotherapistId ,  Physiotherapist.class);
+        if(physiotherapist!= null) return true;
+        else return false;
+    }
+
+
+
 
 
 

@@ -201,7 +201,7 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     @Override
     public Integer getPatient(Integer patientId){
-        Patient patient = restTemplate.getForObject("http://localhost:7010/api/v1/patients/" + patientId ,  Patient.class);
+        Patient patient = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId ,  Patient.class);
         return patient.getUserId();
     }
 
@@ -213,7 +213,7 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     @Override
     public Boolean isExistsUserIdToPatient(Integer userId){
-        Integer userId2 = restTemplate.getForObject("http://localhost:7010/api/v1/patients/userId/" + userId , Integer.class);
+        Integer userId2 = restTemplate.getForObject("http://localhost:8080/api/v1/patients/userId/" + userId , Integer.class);
         return userId2 != null;
     }
 
