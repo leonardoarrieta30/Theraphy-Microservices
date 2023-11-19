@@ -2,10 +2,10 @@
 FROM openjdk:20-jdk-slim
 
 # Crear el directorio donde residirá la aplicación
-WORKDIR /home/app
+WORKDIR /app
 
 # Añadir el archivo .jar al contenedor
-COPY target/gateway-service-0.0.1-SNAPSHOT.jar /home/app/gateway-service.jar
+COPY target/gateway-service-0.0.1-SNAPSHOT.jar /app/gateway-service.jar
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "/home/app/gateway-service.jar"]
+CMD ["java", "-jar", "gateway-service.jar"]

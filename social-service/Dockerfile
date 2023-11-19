@@ -8,4 +8,4 @@ WORKDIR /app
 COPY target/social-service-0.0.1-SNAPSHOT.jar /app/social-service.jar
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "/social-service.jar"]
+CMD ["java", "-jar", "social-service.jar"]

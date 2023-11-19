@@ -11,3 +11,4 @@ spring:
           uri: https://github.com/SI657-2302-WX71-DigitAlholics/SpringCloudConfig-GitRepository
 
   # Spring properties in case you use different profiles
+

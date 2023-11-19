@@ -143,7 +143,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
         if(appointment == null)
             throw new ResourceNotFoundException("Appointment not found");
-        Theraphy2 theraphy2 = restTemplate.getForObject("http://localhost:8080/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
+        Theraphy2 theraphy2 = restTemplate.getForObject("http://therapy-service:7013/api/v1/theraphies/getTherapyByAppointment/" + appointmentId, Theraphy2.class);
         return theraphy2;
     }
 
@@ -155,20 +155,20 @@ public class AppointmentServiceImpl implements AppointmentService {
 //    }
 
     public Theraphy2 getTherapyById(Integer therapyId){
-        Theraphy2 therapy = restTemplate.getForObject("http://localhost:8080/api/v1/theraphies/" + therapyId, Theraphy2.class);
+        Theraphy2 therapy = restTemplate.getForObject("http://therapy-service:7013/api/v1/theraphies/" + therapyId, Theraphy2.class);
         return therapy;
     }
 
 
     @Override
     public Boolean getPatient(Integer patientId){
-        Patient patient = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId ,  Patient.class);
+        Patient patient = restTemplate.getForObject("http://patient-service:7009/api/v1/patients/" + patientId ,  Patient.class);
         if(patient!= null) return true;
         else return false;
     }
     @Override
     public Boolean getPhysiotherapist(Integer physiotherapistId){
-        Physiotherapist physiotherapist = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/" + physiotherapistId ,  Physiotherapist.class);
+        Physiotherapist physiotherapist = restTemplate.getForObject("http://physiotherapist-service:7010/api/v1/physiotherapists/" + physiotherapistId ,  Physiotherapist.class);
         if(physiotherapist!= null) return true;
         else return false;
     }
