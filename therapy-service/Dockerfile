@@ -1,5 +1,11 @@
+# Usar la imagen oficial de OpenJDK 20
 FROM openjdk:20-jdk-slim
-COPY ./target/therapy-service-0.0.1-SNAPSHOT.jar /
-RUN sh -c 'touch therapy-service-0.0.1-SNAPSHOT.jar'
-ENTRYPOINT ["java","-jar","/therapy-service-0.0.1-SNAPSHOT.jar"]
-RUN chmod +x /therapy-service-0.0.1-SNAPSHOT.jar
+
+# Crear el directorio donde residirá la aplicación
+WORKDIR /app
+
+# Añadir el archivo .jar al contenedor
+COPY target/therapy-service-0.0.1-SNAPSHOT.jar /app/therapy-service.jar
+
+# Ejecutar la aplicación
+CMD ["java", "-jar", "therapy-service.jar"]

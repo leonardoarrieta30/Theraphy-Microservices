@@ -24,7 +24,7 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   appointment-service:
     build: ./appointment-service
@@ -36,7 +36,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   healthrecordandexpertise-service:
     build: ./healthrecordandexpertise
@@ -48,7 +48,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   patient-service:
     build: ./patient-service
@@ -60,7 +60,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   physiotherapist-service:
     build: ./physiotherapist-service
@@ -72,7 +72,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   security-service:
     build: ./security-service
@@ -84,7 +84,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
   social-service:
     build: ./social-service
     ports:
@@ -95,7 +95,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 
   therapy-service:
     build: ./therapy-service
@@ -107,5 +107,5 @@ services:
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - eureka
+      - eureka-server
 

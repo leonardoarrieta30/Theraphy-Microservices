@@ -2,10 +2,10 @@
 FROM openjdk:20-jdk-slim
 
 # Crear el directorio donde residirá la aplicación
-WORKDIR /app
+WORKDIR /home/app
 
 # Añadir el archivo .jar al contenedor
-COPY target/healthrecordandexpertise-0.0.1-SNAPSHOT.jar /app/healthrecordandexpertise.jar
+COPY target/gateway-service-0.0.1-SNAPSHOT.jar /home/app/gateway-service.jar
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "healthrecordandexpertise.jar"]
+CMD ["java", "-jar", "/home/app/gateway-service.jar"]

@@ -5,7 +5,7 @@ FROM openjdk:20-jdk-slim
 WORKDIR /app
 
 # Añadir el archivo .jar al contenedor
-COPY target/healthrecordandexpertise-0.0.1-SNAPSHOT.jar /app/healthrecordandexpertise.jar
+COPY target/config-server-0.0.1-SNAPSHOT.jar /app/config-server.jar
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "healthrecordandexpertise.jar"]
+CMD ["java", "-jar", "config-server.jar"]
