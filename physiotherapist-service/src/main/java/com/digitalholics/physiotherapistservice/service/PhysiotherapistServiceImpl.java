@@ -176,14 +176,14 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     @Override
     public Patient getPatientById(Integer patientId){
-        Patient patient  = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId, Patient.class);
+        Patient patient  = restTemplate.getForObject("http://gateway-service:8080/api/v1/patients/" + patientId, Patient.class);
         return patient;
     }
 
 
     @Override
     public Boolean getUserById(Integer userId){
-        User user  = restTemplate.getForObject("http://localhost:8080/api/v1/users/" + userId, User.class);
+        User user  = restTemplate.getForObject("http://gateway-service:8080/api/v1/users/" + userId, User.class);
         if(user!=null) return true;
         else return false;
     }
@@ -191,13 +191,13 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     @Override
     public List<Patient> getPatients(){
-        List<Patient> patientList  = Collections.singletonList(restTemplate.getForObject("http://localhost:8080/api/v1/patients/allPatients", Patient.class));
+        List<Patient> patientList  = Collections.singletonList(restTemplate.getForObject("http://gateway-service:8080/api/v1/patients/allPatients", Patient.class));
         return patientList;
     }
 
     @Override
     public Integer getPatient(Integer patientId){
-        Patient patient = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId ,  Patient.class);
+        Patient patient = restTemplate.getForObject("http://gateway-service:8080/api/v1/patients/" + patientId ,  Patient.class);
         return patient.getUserId();
     }
 
@@ -209,7 +209,7 @@ public class PhysiotherapistServiceImpl implements PhysiotherapistService {
 
     @Override
     public Boolean isExistsUserIdToPatient(Integer userId){
-        Integer userId2 = restTemplate.getForObject("http://localhost:8080/api/v1/patients/userId/" + userId , Integer.class);
+        Integer userId2 = restTemplate.getForObject("http://gateway-service:8080/api/v1/patients/userId/" + userId , Integer.class);
         return userId2 != null;
     }
 

@@ -125,7 +125,7 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService {
 
     @Override
     public Patient getPatientById(Integer patientId){
-        Patient patient  = restTemplate.getForObject("http://localhost:8080/api/v1/patients/" + patientId, Patient.class);
+        Patient patient  = restTemplate.getForObject("http://gateway-service:8080/api/v1/patients/" + patientId, Patient.class);
         return patient;
     }
 

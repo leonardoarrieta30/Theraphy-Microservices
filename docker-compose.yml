@@ -1,33 +1,47 @@
 version: '3.8'
+
+networks:
+  therapy-net:
+    driver: bridge
+
 services:
   eureka-server:
     build: ./eureka-server
     ports:
-      - "4300:8761"
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
-      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - "8761:8761"
+    #environment:
+#      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+#      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+#      - EUREKA_CLIENT_FETCH_REGISTRY=false
     depends_on:
       - config-server
+    networks:
+      - therapy-net
+
+
 
   gateway-service:
     build: ./gateway-service
     ports:
-      - "4302:8080"
+      - "8080:8080"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      #- eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+#      - eureka.client.register.with.eureka=false
+#      - eureka.client.fetch.registry=false
     depends_on:
+      - config-server
       - eureka-server
+    networks:
+      - therapy-net
 
   config-server:
     build: ./config-server
     ports:
-      - "4301:8888"
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
-      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - "8888:8888"
+    networks:
+      - therapy-net
 
   appointment-service:
     build: ./appointment-service
@@ -37,9 +51,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/appointment?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   healthrecordandexpertise-service:
     build: ./healthrecordandexpertise
@@ -49,9 +65,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/healthrecordandexpertise?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   patient-service:
     build: ./patient-service
@@ -61,9 +79,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/patient?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   physiotherapist-service:
     build: ./physiotherapist-service
@@ -73,9 +93,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/physiotherapist?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   security-service:
     build: ./security-service
@@ -85,9 +107,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/security?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   social-service:
     build: ./social-service
@@ -97,9 +121,11 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/social?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
+    networks:
+      - therapy-net
 
   therapy-service:
     build: ./therapy-service
@@ -109,7 +135,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://therapy-microservices.mysql.database.azure.com:3306/therapy?useSSL=true&serverTimeZone=UTC&useLegacyDatetimeCode=false
       - SPRING_DATASOURCE_USERNAME=admin_therapy
       - SPRING_DATASOURCE_PASSWORD=XnySqs63R65w5KT
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
-
+    networks:
+      - therapy-net

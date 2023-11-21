@@ -175,7 +175,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Boolean getUserById(Integer userId){
-        User user  = restTemplate.getForObject("http://localhost:8080/api/v1/users/" + userId, User.class);
+        User user  = restTemplate.getForObject("http://gateway-service:8080/api/v1/users/" + userId, User.class);
         if(user!=null) return true;
         else return false;
     }
@@ -197,7 +197,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Boolean isExistsUserIdToPhysiotherapist(Integer userId){
-        Integer userId2 = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/userId/" + userId , Integer.class);
+        Integer userId2 = restTemplate.getForObject("http://gateway-service:8080/api/v1/physiotherapists/userId/" + userId , Integer.class);
         return userId2 != null;
     }
 

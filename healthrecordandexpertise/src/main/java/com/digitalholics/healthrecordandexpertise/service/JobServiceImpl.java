@@ -96,7 +96,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Physiotherapist getPhysiotherapistById(Integer physiotherapistId){
-        Physiotherapist physiotherapist  = restTemplate.getForObject("http://localhost:8080/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
+        Physiotherapist physiotherapist  = restTemplate.getForObject("http://gateway-service:8080/api/v1/physiotherapists/" + physiotherapistId, Physiotherapist.class);
         return physiotherapist;
     }
 

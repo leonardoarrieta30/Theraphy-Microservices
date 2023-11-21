@@ -1,11 +1,5 @@
-# Usar la imagen oficial de OpenJDK 20
 FROM openjdk:20-jdk-slim
-
-# Crear el directorio donde residirá la aplicación
-WORKDIR /app
-
-# Añadir el archivo .jar al contenedor
-COPY target/gateway-service-0.0.1-SNAPSHOT.jar /app/gateway-service.jar
-
-# Ejecutar la aplicación
-CMD ["java", "-jar", "gateway-service.jar"]
+COPY ./target/gateway-service-0.0.1-SNAPSHOT.jar /
+RUN sh -c 'touch gateway-service-0.0.1-SNAPSHOT.jar'
+ENTRYPOINT ["java","-jar","/gateway-service-0.0.1-SNAPSHOT.jar"]
+RUN chmod +x /gateway-service-0.0.1-SNAPSHOT.jar

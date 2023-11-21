@@ -3,6 +3,24 @@ spring:
     name: gateway-service
   cloud:
     config:
-      enabled: true
-      uri: http://localhost:8888
-#      fail-fast: true
+      gateway:
+        discovery:
+          locator:
+            enabled: true
+            lowerCaseServiceId: true
+      uri: http://config-server:8888
+
+      #fail-fast: true
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://eureka-server:8761/eureka/
+#      initialInstanceInfoReplicationIntervalSeconds: 5
+#      registryFetchIntervalSeconds: 5
+#      instance:
+#      leaseRenewalIntervalInSeconds: 5
+#      leaseExpirationDurationInSeconds: 5
+
+
+
+
