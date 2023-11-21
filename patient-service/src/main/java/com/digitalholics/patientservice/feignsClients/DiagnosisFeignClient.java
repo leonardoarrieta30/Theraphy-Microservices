@@ -11,7 +11,7 @@ import java.util.List;
 public interface DiagnosisFeignClient {
 
 
-    @GetMapping("/api/v1/diagnoses/diagnosisByPatientId/{patientId}")
+    @GetMapping("/api/v1/healthrecordandexpertise/diagnoses/diagnosisByPatientId/{patientId}")
     List<Diagnosis> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId);
 
 
