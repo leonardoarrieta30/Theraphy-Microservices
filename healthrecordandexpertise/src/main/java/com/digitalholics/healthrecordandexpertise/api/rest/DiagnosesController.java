@@ -38,9 +38,9 @@ public class DiagnosesController {
     }
 
     @GetMapping("/diagnosisByPatientId/{patientId}")
-    public ResponseEntity<List<Diagnosis>> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId){
+    public List<Diagnosis> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId){
         List<Diagnosis> diagnosisList =  diagnosisService.getDiagnosisByPatientId(patientId);
-        return ResponseEntity.ok(diagnosisList);
+        return diagnosisList;
     }
 
 

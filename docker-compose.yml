@@ -57,7 +57,7 @@ services:
     networks:
       - therapy-net
 
-  healthrecordandexpertise-service:
+  healthrecordandexpertise:
     build: ./healthrecordandexpertise
     ports:
       - "4304:7008"
