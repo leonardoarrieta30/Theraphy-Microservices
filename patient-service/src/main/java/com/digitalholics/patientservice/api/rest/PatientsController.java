@@ -62,32 +62,32 @@ public class PatientsController {
         return mapper.toResource(patientService.update(patientId, mapper.toModel(resource)));
     }
 
-    @RequestMapping(value = "getTheraphyById/{theraphyId}", method = RequestMethod.GET)
-    public Therapy getTheraphyById(@PathVariable Integer theraphyId){
-        Therapy therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + theraphyId, Therapy.class);
-        return therapy;
-    }
-
-    @RequestMapping(value = "getAppointmentById/{appointmentId}", method = RequestMethod.GET)
-    public Appointment getAppointmentById(@PathVariable Integer appointmentId){
-        Appointment appointment = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/" + appointmentId, Appointment.class);
-        return appointment;
-    }
-
-    @GetMapping("patient/therapy/{therapyId}")
-    public ResponseDTO getTherapyByAppointmentPatientById(@PathVariable Integer therapyId){
-        ResponseDTO responseDTO = new ResponseDTO();
-//        Patient patient;
-//        patient = patientService.getById(patientId);
-        ResponseEntity<Therapy> responseEntity = restTemplate.getForEntity("http://localhost:7009/api/v1/theraphies/" + therapyId, Therapy.class);
-
-        Therapy therapy = responseEntity.getBody();
-
-        responseDTO.setTherapy(therapy);
-        //responseDTO.setAppointment(appointment);
-
-        return responseDTO;
-    }
+//    @RequestMapping(value = "getTheraphyById/{theraphyId}", method = RequestMethod.GET)
+//    public Therapy getTheraphyById(@PathVariable Integer theraphyId){
+//        Therapy therapy = restTemplate.getForObject("http://localhost:7009/api/v1/theraphies/" + theraphyId, Therapy.class);
+//        return therapy;
+//    }
+//
+//    @RequestMapping(value = "getAppointmentById/{appointmentId}", method = RequestMethod.GET)
+//    public Appointment getAppointmentById(@PathVariable Integer appointmentId){
+//        Appointment appointment = restTemplate.getForObject("http://localhost:7007/api/v1/appointments/" + appointmentId, Appointment.class);
+//        return appointment;
+//    }
+//
+//    @GetMapping("patient/therapy/{therapyId}")
+//    public ResponseDTO getTherapyByAppointmentPatientById(@PathVariable Integer therapyId){
+//        ResponseDTO responseDTO = new ResponseDTO();
+////        Patient patient;
+////        patient = patientService.getById(patientId);
+//        ResponseEntity<Therapy> responseEntity = restTemplate.getForEntity("http://localhost:7009/api/v1/theraphies/" + therapyId, Therapy.class);
+//
+//        Therapy therapy = responseEntity.getBody();
+//
+//        responseDTO.setTherapy(therapy);
+//        //responseDTO.setAppointment(appointment);
+//
+//        return responseDTO;
+//    }
 
 
 //normalmente el physi crea la terapia, pero nose porque cree esto xD
