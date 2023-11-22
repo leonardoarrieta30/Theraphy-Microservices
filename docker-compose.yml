@@ -58,7 +58,7 @@ services:
       - therapy-net
 
   healthrecordandexpertise-service:
-    build: ./healthrecordandexpertise
+    build: ./healthrecordandexpertise-service
     ports:
       - "4304:7008"
     environment:

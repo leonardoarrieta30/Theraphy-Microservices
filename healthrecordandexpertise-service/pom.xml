@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.digitalholics</groupId>
-	<artifactId>healthrecordandexpertise</artifactId>
+	<artifactId>healthrecordandexpertise-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>healthrecordandexpertise</name>
 	<description>healthrecordandexpertise</description>

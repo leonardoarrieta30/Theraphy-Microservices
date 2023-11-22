@@ -2,10 +2,11 @@ package com.digitalholics.socialservice.feignClients;
 
 import com.digitalholics.socialservice.domain.model.entity.dto.Physiotherapist;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "physiotherapist-service", url = "http://localhost:8080")
+@FeignClient(name = "physiotherapist-service", url = "http://gateway-service:8080")
 public interface PhysiotherapistFeignClient {
 
     //@PatchMapping("/api/v1/physiotherapists/patch/{physiotherapistId}")
@@ -13,5 +14,5 @@ public interface PhysiotherapistFeignClient {
             method = RequestMethod.PATCH,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    Physiotherapist save(@PathVariable("physiotherapistId") Integer physiotherapistId, @RequestBody Physiotherapist physiotherapist);
+    Physiotherapist save(@Param("physiotherapistId") Integer physiotherapistId, @RequestBody Physiotherapist physiotherapist);
 }

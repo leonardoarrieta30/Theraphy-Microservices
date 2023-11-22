@@ -131,7 +131,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 
         double ratingPhysiotherapist = 0.0;
-        List<Review> reviewsPhysiotherapist = reviewRepository.findByPhysiotherapistId(review.getPhysiotherapistId());
+        List<Review> reviewsPhysiotherapist = reviewRepository.findByPhysiotherapistId(reviewResource.getPhysiotherapistId());
 
         for (Review existingReview : reviewsPhysiotherapist) {
             ratingPhysiotherapist = ratingPhysiotherapist + existingReview.getScore();
@@ -139,10 +139,11 @@ public class ReviewServiceImpl implements ReviewService {
         ratingPhysiotherapist = ratingPhysiotherapist + review.getScore();
         ratingPhysiotherapist = ratingPhysiotherapist/(reviewsPhysiotherapist.size()+1) ;
 
-        this.getPhysiotherapistById(review.getPhysiotherapistId()).setRating(ratingPhysiotherapist);
-
+        //this.getPhysiotherapistById(review.getPhysiotherapistId()).setRating(ratingPhysiotherapist);
+        Physiotherapist physiotherapist =  this.getPhysiotherapistById(reviewResource.getPhysiotherapistId());
+        physiotherapist.setRating(ratingPhysiotherapist);
         //post
-        physiotherapistFeignClient.save(review.getPhysiotherapistId(), this.getPhysiotherapistById(review.getPhysiotherapistId()));
+        physiotherapistFeignClient.save(reviewResource.getPhysiotherapistId(), physiotherapist);
         //physiotherapistRepository.save(physiotherapist);
 
 

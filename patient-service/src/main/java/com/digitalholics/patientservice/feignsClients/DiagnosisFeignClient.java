@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "healthrecordandexpertise-service", url = "http://localhost:8080")
+@FeignClient(name = "healthrecordandexpertise-service", url = "http://gateway-service:8080")
 public interface DiagnosisFeignClient {
 
 
-    @GetMapping("/api/v1/diagnoses/diagnosisByPatientId/{patientId}")
+    @GetMapping("/api/v1/healthrecordandexpertise/diagnoses/diagnosisByPatientId/{patientId}")
     List<Diagnosis> getDiagnosisByPatientId(@PathVariable("patientId") Integer patientId);
 
 

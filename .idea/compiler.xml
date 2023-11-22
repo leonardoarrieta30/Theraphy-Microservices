@@ -9,11 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="appointment-service" />
+        <module name="healthrecordandexpertise-service" />
         <module name="physiotherapist-service" />
         <module name="gateway-service" />
         <module name="security-service" />
         <module name="social-service" />
-        <module name="healthrecordandexpertise" />
         <module name="patient-service" />
         <module name="therapy-service" />
         <module name="eureka-server" />
@@ -26,7 +26,7 @@
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
-      <module name="healthrecordandexpertise" options="-parameters" />
+      <module name="healthrecordandexpertise-service" options="-parameters" />
       <module name="patient-service" options="-parameters" />
       <module name="physiotherapist-service" options="-parameters" />
       <module name="security-service" options="-parameters" />

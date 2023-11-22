@@ -27,6 +27,7 @@ eureka:
       leaseRenewalIntervalInSeconds: 5
       leaseExpirationDurationInSeconds: 5
 
-
-
+feign:
+  okhttp:
+    enabled=true:
 

@@ -46,7 +46,7 @@ public class PhysiotherapistController {
             @PathVariable Integer physiotherapistId,
             @RequestBody UpdatePhysiotherapistResource request) {
 
-        return new  ResponseEntity<>(mapper.toResource(physiotherapistService.update(physiotherapistId,request)), HttpStatus.CREATED);
+        return new  ResponseEntity<>(mapper.toResource(physiotherapistService.update(physiotherapistId,request)), HttpStatus.OK);
     }
 
     @DeleteMapping("{physiotherapistId}")
