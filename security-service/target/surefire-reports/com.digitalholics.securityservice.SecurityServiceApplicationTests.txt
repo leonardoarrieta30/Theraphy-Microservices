@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.digitalholics.securityservice.SecurityServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 50.287 s - in com.digitalholics.securityservice.SecurityServiceApplicationTests
